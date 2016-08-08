@@ -1,0 +1,12 @@
+---
+- name: Remove previous deployment
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /usr/share/tomcat/webapps/cas
+    - /usr/share/tomcat/webapps/cas.war
+- name: Deploy war
+  copy:
+    src: /usr/src/cas-overlay/target/cas.war
+    dest: /usr/share/tomcat/webapps/cas.war

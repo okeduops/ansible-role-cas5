@@ -1,0 +1,25 @@
+---
+- name: Ensure ssl cert directory exists
+  file:
+    path: "{{ ssl_cert_path }}/localhost"
+    state: directory
+- name: Ensure ssl key directory exists
+  file:
+    path: "{{ ssl_key_path }}/localhost"
+    state: directory
+- name: Generate a self-signed cert.
+  sudo: yes
+  command: >
+     openssl req -newkey rsa:2048 -nodes -sha256 -x509 -subj "/CN=localhost" -days 90 -keyout "{{ ssl_key_path }}"/localhost/privkey.pem -out "{{ ssl_cert_path }}"/localhost/cert.pem
+  args:
+    creates: "{{ ssl_key_path }}/localhost/privkey.pem"
+- name: Create a dummy chain file
+  sudo: yes
+  shell: >
+    echo \# > "{{ ssl_cert_path }}/localhost/chain.pem"
+  args:
+    creates: "{{ ssl_cert_path }}/localhost/chain.pem"
+#- name: Generate a cert keystore for Tomcat
+#  sudo: yes
+#  command: >
+#    openssl pkcs12 -export -in /etc/pki/tls/certs/localhost/cert.pem -inkey /etc/pki/tls/private/localhost/privkey.pem -out /etc/pki/tls/private/localhost/privkey.p12 -name tomcat -password pass:"{{ ssl_keystore_pass }}"

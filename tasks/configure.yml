@@ -1,0 +1,27 @@
+---
+- name: Ensure Directories exist
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: wheel
+    mode: 0775
+  with_items:
+    - /etc/cas
+- name: Place CAS properties
+  template:
+    src: cas.properties.j2
+    dest: /etc/cas/cas.properties
+- name: Place CAS log config
+  template:
+    src: log4j2.xml.j2
+    dest: /etc/cas/log4j2.xml
+- name: Place server.xml for Tomcat
+  template:
+    src: server.xml.j2
+    dest: /usr/share/tomcat/conf/server.xml
+- name: Configure JAVA_OPTS for Tomcat
+  lineinfile:
+    dest: /usr/share/tomcat/conf/tomcat.conf
+    line: >
+      JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC"

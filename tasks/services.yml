@@ -1,0 +1,13 @@
+---
+- name: tomcat restarted
+  service:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+  - tomcat
+- name: Verify that cas is up
+  uri:
+    url: https://localhost:8443/cas
+    method: GET
+    status_code: ['200', '301']
+    validate_certs: no

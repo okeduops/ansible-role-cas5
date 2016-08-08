@@ -1,0 +1,12 @@
+---
+- name: Yum packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    #- java-1.7.0-openjdk
+    - java
+    - tomcat
+    - tomcat-native
+    - git
+    - maven

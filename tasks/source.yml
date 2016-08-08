@@ -1,0 +1,7 @@
+---
+- name: CAS Maven Overlay
+  git:
+    repo: https://github.com/apereo/cas-overlay-template.git
+    dest: /usr/src/cas-overlay
+    version: 4.2
+    force: yes
