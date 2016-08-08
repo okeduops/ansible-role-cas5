@@ -57,5 +57,9 @@
         <AsyncRoot level="error">
             <AppenderRef ref="console"/>
         </AsyncRoot>
+        <Logger name="org.ldaptive" level="debug" additivity="false">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="file"/>
+        </Logger>
     </Loggers>
 </Configuration>

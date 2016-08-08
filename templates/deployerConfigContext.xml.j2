@@ -21,7 +21,7 @@
     <util:map id="authenticationHandlersResolvers">
         <entry key-ref="proxyAuthenticationHandler" value-ref="proxyPrincipalResolver" />
         <entry key-ref="primaryAuthenticationHandler" value-ref="primaryPrincipalResolver" />
-        <entry key-ref="ldapAuthenticationHandler" value-ref="primaryPrincipalResolver" />
+        <entry key-ref="ldapAuthenticationHandler" value="#{null}" />
     </util:map>
 
     <util:list id="authenticationMetadataPopulators">
@@ -35,7 +35,7 @@
     <bean id="ldapAuthenticationHandler"
       class="org.jasig.cas.authentication.LdapAuthenticationHandler"
       p:principalIdAttribute="sAMAccountName"
-      c:authenticator-ref="authenticator">
+      c:authenticator-ref="ldap-ad-authenticator">
       <property name="principalAttributeMap">
         <map>
             <entry key="displayName" value="simpleName" />
@@ -91,21 +91,43 @@
     <alias name="defaultPrincipalElectionStrategy" alias="principalElectionStrategy" />
     <alias name="tgcCipherExecutor" alias="defaultCookieCipherExecutor" />
 
-    <ldaptive:direct-authenticator id="authenticator"
-        format="{{ cas_ldap_authn_searchFilter }}"
-        ldapUrl="{{ cas_ldap_url }}"
-        connectTimeout="{{ cas_ldap_connectTimeout }}"
-        validateOnCheckOut="{{ cas_ldap_pool_validateOnCheckout }}"
+    <ldaptive:ad-authenticator id="ldap-ad-authenticator"
+        ldapUrl="${ldap.url}"
+        userFilter="${ldap.authn.searchFilter}"
+        bindDn="${ldap.managerDn}"
+        bindCredential="${ldap.managerPassword}"
+        allowMultipleDns="${ldap.allowMultipleDns:false}"
+        connectTimeout="${ldap.connectTimeout}"
+        validateOnCheckOut="${ldap.pool.validateOnCheckout}"
         failFastInitialize="true"
-        blockWaitTime="{{ cas_ldap_pool_blockWaitTime }}"
-        idleTime="{{ cas_ldap_pool_idleTime }}"
-        usePasswordPolicy="{{ cas_ldap_usePpolicy }}"
-        maxPoolSize="{{ cas_ldap_pool_maxSize }}"
-        minPoolSize="{{ cas_ldap_pool_minSize }}"
-        validatePeriodically="{{ cas_ldap_pool_validatePeriodically }}"
-        validatePeriod="{{ cas_ldap_pool_validatePeriod }}"
-        prunePeriod="{{ cas_ldap_pool_prunePeriod }}"
-        useSSL="{{ cas_ldap_use_ssl }}"
-        useStartTLS="{{ cas_ldap_useStartTLS }}" 
+        blockWaitTime="${ldap.pool.blockWaitTime}"
+        idleTime="${ldap.pool.idleTime}"
+        baseDn="${ldap.baseDn}"
+        maxPoolSize="${ldap.pool.maxSize}"
+        minPoolSize="${ldap.pool.minSize}"
+        validatePeriodically="${ldap.pool.validatePeriodically}"
+        validatePeriod="${ldap.pool.validatePeriod}"
+        prunePeriod="${ldap.pool.prunePeriod}"
+        useSSL="${ldap.use.ssl:false}"
+        subtreeSearch="${ldap.subtree.search:true}"
+        useStartTLS="${ldap.useStartTLS}"
+    />
+
+    <ldaptive:direct-authenticator id="ldap-direct-authenticator"
+        format="${ldap.authn.searchFilter}"
+        ldapUrl="${ldap.url}"
+        connectTimeout="${ldap.connectTimeout}"
+        validateOnCheckOut="${ldap.pool.validateOnCheckout}"
+        failFastInitialize="true"
+        blockWaitTime="${ldap.pool.blockWaitTime}"
+        idleTime="${ldap.pool.idleTime}"
+        usePasswordPolicy="${ldap.usePpolicy:false}"
+        maxPoolSize="${ldap.pool.maxSize}"
+        minPoolSize="${ldap.pool.minSize}"
+        validatePeriodically="${ldap.pool.validatePeriodically}"
+        validatePeriod="${ldap.pool.validatePeriod}"
+        prunePeriod="${ldap.pool.prunePeriod}"
+        useSSL="${ldap.use.ssl:false}"
+        useStartTLS="${ldap.useStartTLS}" 
     />
 </beans>
