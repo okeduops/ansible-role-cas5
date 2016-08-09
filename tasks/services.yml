@@ -5,9 +5,14 @@
     state: restarted
   with_items:
   - tomcat
+- name: Wait for war deployment to finish
+  wait_for:
+    timeout: 400
+    path: "/var/log/tomcat/catalina.{{ ansible_date_time.date }}.log"
+    search_regex: 'INFO: Deployment of web application archive /var/lib/tomcat/webapps/cas\.war has finished'
 - name: Verify that cas is up
   uri:
-    url: https://localhost:8443/cas
+    url: https://localhost:8443/cas/login
     method: GET
-    status_code: ['200', '301']
+    status_code: 200
     validate_certs: no
