@@ -4,9 +4,9 @@
     path: "{{ item }}"
     state: absent
   with_items:
-    - /usr/share/tomcat/webapps/cas
-    - /usr/share/tomcat/webapps/cas.war
+    - /usr/share/tomcat/webapps/ROOT
+    - /usr/share/tomcat/webapps/ROOT.war
 - name: Deploy war
   copy:
     src: /usr/src/cas-overlay/target/cas.war
-    dest: /usr/share/tomcat/webapps/cas.war
+    dest: /usr/share/tomcat/webapps/ROOT.war
