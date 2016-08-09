@@ -17,9 +17,8 @@
     src: deployerConfigContext.xml.j2
     dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/deployerConfigContext.xml
 - name: Build CAS
-  #command: "mvn -B -e -l /vagrant/maven_error clean package install"
   shell: >
     bash -c "export JAVA_HOME=/usr/lib/jvm/java && ./mvnw clean package"
   args:
     chdir: /usr/src/cas-overlay
-    #creates: /usr/src/cas-4.2.4/target/cas.war 
+    creates: /usr/src/cas-overlay/target/cas.war 
