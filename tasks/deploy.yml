@@ -8,5 +8,6 @@
     - /usr/share/tomcat/webapps/ROOT.war
 - name: Deploy war
   copy:
+    remote_src: True
     src: /usr/src/cas-overlay/target/cas.war
     dest: /usr/share/tomcat/webapps/ROOT.war
