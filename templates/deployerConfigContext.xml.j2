@@ -19,8 +19,6 @@
 
 
     <util:map id="authenticationHandlersResolvers">
-        <entry key-ref="proxyAuthenticationHandler" value-ref="proxyPrincipalResolver" />
-        <entry key-ref="primaryAuthenticationHandler" value-ref="primaryPrincipalResolver" />
         <entry key-ref="ldapAuthenticationHandler" value="#{null}" />
     </util:map>
 
@@ -29,8 +27,7 @@
         <ref bean="rememberMeAuthenticationMetaDataPopulator" />
     </util:list>
 
-    <bean id="attributeRepository" class="org.jasig.services.persondir.support.NamedStubPersonAttributeDao"
-          p:backingMap-ref="attrRepoBackingMap" />
+    <bean id="attributeRepository" class="org.jasig.services.persondir.support.NamedStubPersonAttributeDao" />
 
     <bean id="ldapAuthenticationHandler"
       class="org.jasig.cas.authentication.LdapAuthenticationHandler"
@@ -46,21 +43,6 @@
     </bean>
 
     <alias name="acceptUsersAuthenticationHandler" alias="primaryAuthenticationHandler" />
-    <alias name="personDirectoryPrincipalResolver" alias="primaryPrincipalResolver" />
-
-    <util:map id="attrRepoBackingMap">
-        <entry key="uid" value="uid" />
-        <entry key="eduPersonAffiliation" value="eduPersonAffiliation" />
-        <entry key="groupMembership" value="groupMembership" />
-        <entry>
-            <key><value>memberOf</value></key>
-            <list>
-                <value>faculty</value>
-                <value>staff</value>
-                <value>org</value>
-            </list>
-        </entry>
-    </util:map>
 
     <alias name="serviceThemeResolver" alias="themeResolver" />
 
