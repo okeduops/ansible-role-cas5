@@ -4,18 +4,33 @@
     path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/spring-configuration
     state: directory
     recurse: yes
+
 - name: Use local pom.xml
   template:
     src: pom.xml.j2
     dest: /usr/src/cas-overlay/pom.xml
+
 - name: Use local propertyFileConfigurer.xml
   template:
     src: propertyFileConfigurer.xml.j2
     dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/spring-configuration/propertyFileConfigurer.xml
+
 - name: Use local deployerConfigContext.xml
   template:
     src: deployerConfigContext.xml.j2
     dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/deployerConfigContext.xml
+
+- name: Ensure service declaration directory exists
+  file:
+    path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
+    state: directory
+    recurse: yes
+
+- name: Use local service declarations
+  template:
+    src: ServiceDeclaration.json.j2
+    dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services/ServiceDeclaration.json
+
 - name: Build CAS
   shell: >
     bash -c "export JAVA_HOME=/usr/lib/jvm/java && ./mvnw clean package"
