@@ -3,5 +3,5 @@
   git:
     repo: https://github.com/apereo/cas-overlay-template.git
     dest: /usr/src/cas-overlay
-    version: 4.2
+    version: 4.1
     force: yes
