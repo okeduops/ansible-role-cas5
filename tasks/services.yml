@@ -3,6 +3,7 @@
   service:
     name: "{{ item }}"
     state: restarted
+    enabled: yes
   with_items:
   - tomcat
 - name: Wait for war deployment to finish
