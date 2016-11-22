@@ -5,6 +5,9 @@
 ssl_cert_path: /etc/pki/tls/certs
 ssl_key_path: /etc/pki/tls/private
 
+# UI
+cas_screen_welcome_instructions: Enter your Username and Password
+
 # LDAP General
 cas_ldap_url: ""
 cas_ldap_use_ssl: "false"
