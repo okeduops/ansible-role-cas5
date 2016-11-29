@@ -5,6 +5,11 @@
 ssl_cert_path: /etc/pki/tls/certs
 ssl_key_path: /etc/pki/tls/private
 
+# UI
+cas_screen_welcome_instructions: Enter your Username and Password
+cas_screen_welcome_security: For security reasons, please Log Out and Exit your web browser when you are done accessing services that require authentication!
+cas_logo_title: go to Apereo home page
+
 # LDAP General
 cas_ldap_url: ""
 cas_ldap_use_ssl: "false"

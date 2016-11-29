@@ -1,35 +1,50 @@
 ---
-- name: Ensure spring-configuration directory exists
+- name: Ensure overlay directories exist
   file:
-    path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/spring-configuration
+    path: "{{ item }}"
     state: directory
     recurse: yes
+  with_items:
+    - /usr/src/cas-overlay/src/main/webapp/WEB-INF/spring-configuration
+    - /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
+    - /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui/includes
+    - /usr/src/cas-overlay/src/main/webapp/css
+    - /usr/src/cas-overlay/src/main/webapp/images
+    - /usr/src/cas-overlay/src/main/webapp/js
 
-- name: Use local pom.xml
+- name: Use local templates
   template:
-    src: pom.xml.j2
-    dest: /usr/src/cas-overlay/pom.xml
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - src: pom.xml.j2
+      dest: /usr/src/cas-overlay/pom.xml
+    - src: propertyFileConfigurer.xml.j2
+      dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/spring-configuration/propertyFileConfigurer.xml
+    - src: deployerConfigContext.xml.j2
+      dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/deployerConfigContext.xml
+    - src: ServiceDeclaration.json.j2
+      dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services/ServiceDeclaration.json
+    - src: messages.properties.j2
+      dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/messages.properties
 
-- name: Use local propertyFileConfigurer.xml
-  template:
-    src: propertyFileConfigurer.xml.j2
-    dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/spring-configuration/propertyFileConfigurer.xml
-
-- name: Use local deployerConfigContext.xml
-  template:
-    src: deployerConfigContext.xml.j2
-    dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/deployerConfigContext.xml
-
-- name: Ensure service declaration directory exists
-  file:
-    path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
-    state: directory
-    recurse: yes
-
-- name: Use local service declarations
-  template:
-    src: ServiceDeclaration.json.j2
-    dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services/ServiceDeclaration.json
+- name: Use local files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - src: casLoginView.jsp
+      dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui/casLoginView.jsp
+    - src: top.jsp
+      dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui/includes/top.jsp
+    - src: bottom.jsp
+      dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui/includes/bottom.jsp
+    - src: cas.css
+      dest: /usr/src/cas-overlay/src/main/webapp/css/cas.css
+    - src: logo.png
+      dest: /usr/src/cas-overlay/src/main/webapp/images/logo.png
+    - src: cas.js
+      dest: /usr/src/cas-overlay/src/main/webapp/js/cas.js
 
 - name: Build CAS
   shell: >
