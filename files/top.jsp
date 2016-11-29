@@ -28,6 +28,5 @@
 <div id="container">
   <header>
     <a id="logo" href="https://libraries.ou.edu" title="<spring:message code="logo.title" />">OU Libraries</a>
-    <h1>OU Libraries Authentication Service</h1>
   </header>
   <div id="content">
