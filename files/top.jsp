@@ -12,7 +12,7 @@
   <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>CAS &#8211; Central Authentication Service</title>
+    <title>OU Libraries Authentication Service</title>
 
     <meta name="_csrf" content="${_csrf.token}"/>
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
@@ -27,7 +27,7 @@
 
 <div id="container">
   <header>
-    <a id="logo" href="http://www.apereo.org" title="<spring:message code="logo.title" />">Apereo</a>
-    <h1>Central Authentication Service (CAS)</h1>
+    <a id="logo" href="https://libraries.ou.edu" title="<spring:message code="logo.title" />">OU Libraries</a>
+    <h1>OU Libraries Authentication Service</h1>
   </header>
   <div id="content">

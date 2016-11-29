@@ -8,6 +8,9 @@
     - /usr/src/cas-overlay/src/main/webapp/WEB-INF/spring-configuration
     - /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
     - /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui/includes
+    - /usr/src/cas-overlay/src/main/webapp/css
+    - /usr/src/cas-overlay/src/main/webapp/images
+    - /usr/src/cas-overlay/src/main/webapp/js
 
 - name: Use local templates
   template:
@@ -36,6 +39,12 @@
       dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui/includes/top.jsp
     - src: bottom.jsp
       dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui/includes/bottom.jsp
+    - src: cas.css
+      dest: /usr/src/cas-overlay/src/main/webapp/css/cas.css
+    - src: logo.png
+      dest: /usr/src/cas-overlay/src/main/webapp/images/logo.png
+    - src: cas.js
+      dest: /usr/src/cas-overlay/src/main/webapp/js/cas.js
 
 - name: Build CAS
   shell: >
