@@ -10,29 +10,29 @@ cas_screen_welcome_instructions: Enter your Username and Password
 cas_screen_welcome_security: For security reasons, please Log Out and Exit your web browser when you are done accessing services that require authentication!
 cas_logo_title: go to Apereo home page
 
-# LDAP General
-cas_ldap_url: ""
-cas_ldap_use_ssl: "false"
-cas_ldap_useStartTLS: "true"
-cas_ldap_rootDn: ""
-cas_ldap_baseDn: ""
-cas_ldap_connectTimeout: 3000
-cas_ldap_managerDn: ""
-cas_ldap_managerPassword: ""
-
-# LDAP connection pool
-cas_ldap_pool_minSize: 1
-cas_ldap_pool_maxSize: 10
-cas_ldap_pool_validateOnCheckout: "false"
-cas_ldap_pool_validatePeriodically: "true"
-cas_ldap_pool_blockWaitTime: 3000
-cas_ldap_pool_validatePeriod: 300
-cas_ldap_pool_prunePeriod: 300
-cas_ldap_pool_idleTime: 600
-
-# LDAP authentication
-cas_ldap_authn_searchFilter: "sAMAccountName={user}"
-cas_ldap_domain: ""
-cas_ldap_userFilter: ""
-cas_ldap_usePpolicy: "false"
-cas_ldap_allowMultipleDns: "true"
+# LDAP Backends
+cas_ldap:
+    # LDAP General
+  - url: ""
+    use_ssl: "false"
+    useStartTLS: "true"
+    rootDn: ""
+    baseDn: ""
+    connectTimeout: 3000
+    managerDn: ""
+    managerPassword: ""
+    # LDAP connection pool
+    pool_minSize: 1
+    pool_maxSize: 10
+    pool_validateOnCheckout: "false"
+    pool_validatePeriodically: "true"
+    pool_blockWaitTime: 3000
+    pool_validatePeriod: 300
+    pool_prunePeriod: 300
+    pool_idleTime: 600
+    # LDAP authentication
+    authn_searchFilter: "sAMAccountName={user}"
+    domain: ""
+    userFilter: ""
+    usePpolicy: "false"
+    allowMultipleDns: "true"

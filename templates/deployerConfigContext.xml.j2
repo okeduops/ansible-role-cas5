@@ -19,7 +19,10 @@
 
 
     <util:map id="authenticationHandlersResolvers">
-        <entry key-ref="ldapAuthenticationHandler" value="#{null}" />
+{% for ldap in cas_ldap %}
+        <entry key-ref="ldapAuthenticationHandler{{ loop.index }}" value="#{null}" />
+{% endfor %}
+
     </util:map>
 
     <util:list id="authenticationMetadataPopulators">
@@ -29,10 +32,11 @@
 
     <bean id="attributeRepository" class="org.jasig.services.persondir.support.NamedStubPersonAttributeDao" />
 
-    <bean id="ldapAuthenticationHandler"
+{% for ldap in cas_ldap %}
+    <bean id="ldapAuthenticationHandler{{ loop.index }}"
       class="org.jasig.cas.authentication.LdapAuthenticationHandler"
       p:principalIdAttribute="sAMAccountName"
-      c:authenticator-ref="ldap-ad-authenticator">
+      c:authenticator-ref="ldap-ad-authenticator{{ loop.index }}">
       <property name="principalAttributeMap">
         <map>
             <entry key="displayName" value="simpleName" />
@@ -41,6 +45,7 @@
         </map>
       </property>
     </bean>
+{% endfor %}
 
     <alias name="acceptUsersAuthenticationHandler" alias="primaryAuthenticationHandler" />
 
@@ -73,43 +78,28 @@
     <alias name="defaultPrincipalElectionStrategy" alias="principalElectionStrategy" />
     <alias name="tgcCipherExecutor" alias="defaultCookieCipherExecutor" />
 
-    <ldaptive:ad-authenticator id="ldap-ad-authenticator"
-        ldapUrl="${ldap.url}"
-        userFilter="${ldap.authn.searchFilter}"
-        bindDn="${ldap.managerDn}"
-        bindCredential="${ldap.managerPassword}"
-        allowMultipleDns="${ldap.allowMultipleDns:false}"
-        connectTimeout="${ldap.connectTimeout}"
-        validateOnCheckOut="${ldap.pool.validateOnCheckout}"
+{% for ldap in cas_ldap %}
+    <ldaptive:ad-authenticator id="ldap-ad-authenticator{{ loop.index }}"
+        ldapUrl="$ldap{{ loop.index }}.url}"
+        userFilter="$ldap{{ loop.index }}.authn.searchFilter}"
+        bindDn="$ldap{{ loop.index }}.managerDn}"
+        bindCredential="$ldap{{ loop.index }}.managerPassword}"
+        allowMultipleDns="$ldap{{ loop.index }}.allowMultipleDns:false}"
+        connectTimeout="$ldap{{ loop.index }}.connectTimeout}"
+        validateOnCheckOut="$ldap{{ loop.index }}.pool.validateOnCheckout}"
         failFastInitialize="true"
-        blockWaitTime="${ldap.pool.blockWaitTime}"
-        idleTime="${ldap.pool.idleTime}"
-        baseDn="${ldap.baseDn}"
-        maxPoolSize="${ldap.pool.maxSize}"
-        minPoolSize="${ldap.pool.minSize}"
-        validatePeriodically="${ldap.pool.validatePeriodically}"
-        validatePeriod="${ldap.pool.validatePeriod}"
-        prunePeriod="${ldap.pool.prunePeriod}"
-        useSSL="${ldap.use.ssl:false}"
-        subtreeSearch="${ldap.subtree.search:true}"
-        useStartTLS="${ldap.useStartTLS}"
+        blockWaitTime="$ldap{{ loop.index }}.pool.blockWaitTime}"
+        idleTime="$ldap{{ loop.index }}.pool.idleTime}"
+        baseDn="$ldap{{ loop.index }}.baseDn}"
+        maxPoolSize="$ldap{{ loop.index }}.pool.maxSize}"
+        minPoolSize="$ldap{{ loop.index }}.pool.minSize}"
+        validatePeriodically="$ldap{{ loop.index }}.pool.validatePeriodically}"
+        validatePeriod="$ldap{{ loop.index }}.pool.validatePeriod}"
+        prunePeriod="$ldap{{ loop.index }}.pool.prunePeriod}"
+        useSSL="$ldap{{ loop.index }}.use.ssl:false}"
+        subtreeSearch="$ldap{{ loop.index }}.subtree.search:true}"
+        useStartTLS="$ldap{{ loop.index }}.useStartTLS}"
     />
+{% endfor %}
 
-    <ldaptive:direct-authenticator id="ldap-direct-authenticator"
-        format="${ldap.authn.searchFilter}"
-        ldapUrl="${ldap.url}"
-        connectTimeout="${ldap.connectTimeout}"
-        validateOnCheckOut="${ldap.pool.validateOnCheckout}"
-        failFastInitialize="true"
-        blockWaitTime="${ldap.pool.blockWaitTime}"
-        idleTime="${ldap.pool.idleTime}"
-        usePasswordPolicy="${ldap.usePpolicy:false}"
-        maxPoolSize="${ldap.pool.maxSize}"
-        minPoolSize="${ldap.pool.minSize}"
-        validatePeriodically="${ldap.pool.validatePeriodically}"
-        validatePeriod="${ldap.pool.validatePeriod}"
-        prunePeriod="${ldap.pool.prunePeriod}"
-        useSSL="${ldap.use.ssl:false}"
-        useStartTLS="${ldap.useStartTLS}" 
-    />
 </beans>
