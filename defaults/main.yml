@@ -18,9 +18,10 @@ cas_ldap:
     useStartTLS: "true"
     rootDn: ""
     baseDn: ""
-    connectTimeout: 3000
     managerDn: ""
     managerPassword: ""
+    domain: ""
+    connectTimeout: 3000
     # LDAP connection pool
     pool_minSize: 1
     pool_maxSize: 10
@@ -32,7 +33,6 @@ cas_ldap:
     pool_idleTime: 600
     # LDAP authentication
     authn_searchFilter: "sAMAccountName={user}"
-    domain: ""
     userFilter: ""
     usePpolicy: "false"
     allowMultipleDns: "true"
