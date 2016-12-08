@@ -10,6 +10,16 @@ cas_screen_welcome_instructions: Enter your Username and Password
 cas_screen_welcome_security: For security reasons, please Log Out and Exit your web browser when you are done accessing services that require authentication!
 cas_logo_title: go to Apereo home page
 
+# Miscellaneous
+cas_logout_followServiceRedirects: "false"
+
+# CAS Services
+cas_services:
+  - serviceId: "^https://.*"
+    name: "Wildcard"
+    description: "Wildcard service"
+    logoutUrl: "https://web.localhost.localdomain/logout"
+
 # LDAP Backends
 cas_ldap:
     # LDAP General

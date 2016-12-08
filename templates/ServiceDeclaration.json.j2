@@ -1,17 +1,19 @@
+{% for service in cas_services %}
 {
   "@class" : "org.jasig.cas.services.RegexRegisteredService",
-  "serviceId" : "^https://.*",
-  "name" : "Wildcard",
-  "id" : 0,
-  "description" : "Wildcard service",
+  "serviceId" : "{{ serviceId }}",
+  "name" : "{{ name }}",
+  "id" : {{ loop.index0 }},
+  "description" : "{{ description }}",
   "proxyPolicy" : {
     "@class" : "org.jasig.cas.services.RefuseRegisteredServiceProxyPolicy"
   },
-  "evaluationOrder" : 0,
+  "evaluationOrder" : {{ loop.index0 }},
   "usernameAttributeProvider" : {
     "@class" : "org.jasig.cas.services.DefaultRegisteredServiceUsernameProvider"
   },
   "logoutType" : "BACK_CHANNEL",
+  "logoutUrl" : "{{ logoutUrl }}",
   "attributeReleasePolicy" : {
     "@class" : "org.jasig.cas.services.ReturnAllAttributeReleasePolicy",
     "authorizedToReleaseCredentialPassword" : false,
@@ -22,4 +24,5 @@
     "enabled" : true,
     "ssoEnabled" : true
   }
-}
+}{% if not loop.last %},{% endif %}
+{% endfor %}
