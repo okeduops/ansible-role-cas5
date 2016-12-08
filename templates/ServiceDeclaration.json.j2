@@ -1,10 +1,10 @@
 {% for service in cas_services %}
 {
   "@class" : "org.jasig.cas.services.RegexRegisteredService",
-  "serviceId" : "{{ serviceId }}",
-  "name" : "{{ name }}",
+  "serviceId" : "{{ service.serviceId }}",
+  "name" : "{{ service.name }}",
   "id" : {{ loop.index0 }},
-  "description" : "{{ description }}",
+  "description" : "{{ service.description }}",
   "proxyPolicy" : {
     "@class" : "org.jasig.cas.services.RefuseRegisteredServiceProxyPolicy"
   },
@@ -13,7 +13,7 @@
     "@class" : "org.jasig.cas.services.DefaultRegisteredServiceUsernameProvider"
   },
   "logoutType" : "BACK_CHANNEL",
-  "logoutUrl" : "{{ logoutUrl }}",
+  "logoutUrl" : "{{ service.logoutUrl }}",
   "attributeReleasePolicy" : {
     "@class" : "org.jasig.cas.services.ReturnAllAttributeReleasePolicy",
     "authorizedToReleaseCredentialPassword" : false,
