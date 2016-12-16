@@ -32,6 +32,6 @@
 - name: Generate a cert keystore for SAML2 Client
   sudo: yes
   command: >
-     keytool -genkeypair -alias pac4j-demo -keypass "{{ cas_pac4j_saml_keypass }}" -keystore /etc/cas/samlKeystore.jks -storepass "{{ cas_pac4j_saml_storepass }}" -dname "{{ cas_pac4j_saml_dname}} -keyalg RSA -keysize 2048 -validity 3650
+     keytool -genkeypair -alias pac4j-demo -keypass "{{ cas_pac4j_saml_keypass }}" -keystore /etc/cas/samlKeystore.jks -storepass "{{ cas_pac4j_saml_storepass }}" -dname "{{ cas_pac4j_saml_dname }} -keyalg RSA -keysize 2048 -validity 3650
   args:
     creates: /etc/cas/samlKeystore.jks
