@@ -16,6 +16,9 @@
   template:
     src: samlSP.xml.j2
     dest: /etc/cas/samlSP.xml
+- name: Fetch SAML2 Client IdP Metadata
+  get_url: "{{ cas_pac4j_saml_idp_md_url }}"
+  dest: /etc/cas/samlIdP.xml
 - name: Place CAS log config
   template:
     src: log4j2.xml.j2
