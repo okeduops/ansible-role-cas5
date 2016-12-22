@@ -12,6 +12,7 @@ cas_logo_title: go to Apereo home page
 
 # Miscellaneous
 cas_logout_followServiceRedirects: "false"
+cas_pac4j_client_authn_typedidused: "true"
 
 # CAS Services
 cas_services:
