@@ -19,7 +19,3 @@
     echo \# > "{{ ssl_cert_path }}/localhost/chain.pem"
   args:
     creates: "{{ ssl_cert_path }}/localhost/chain.pem"
-#- name: Generate a cert keystore for Tomcat
-#  sudo: yes
-#  command: >
-#    openssl pkcs12 -export -in /etc/pki/tls/certs/localhost/cert.pem -inkey /etc/pki/tls/private/localhost/privkey.pem -out /etc/pki/tls/private/localhost/privkey.p12 -name tomcat -password pass:"{{ ssl_keystore_pass }}"

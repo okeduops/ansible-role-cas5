@@ -12,6 +12,13 @@
   template:
     src: cas.properties.j2
     dest: /etc/cas/cas.properties
+- name: Place SAML2 Client metadata
+  template:
+    src: samlSP.xml.j2
+    dest: /etc/cas/samlSP.xml
+- name: Fetch SAML2 Client IdP Metadata
+  get_url: "{{ cas_pac4j_saml_idp_md_url }}"
+  dest: /etc/cas/samlIdP.xml
 - name: Place CAS log config
   template:
     src: log4j2.xml.j2
@@ -25,3 +32,9 @@
     dest: /usr/share/tomcat/conf/tomcat.conf
     line: >
       JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC"
+- name: Generate a cert keystore for SAML2 Client
+  sudo: yes
+  command: >
+     keytool -genkeypair -alias pac4j-demo -keypass "{{ cas_pac4j_saml_keypass }}" -keystore /etc/cas/samlKeystore.jks -storepass "{{ cas_pac4j_saml_storepass }}" -dname "{{ cas_pac4j_saml_dname }}" -keyalg RSA -keysize 2048 -validity 3650
+  args:
+    creates: /etc/cas/samlKeystore.jks

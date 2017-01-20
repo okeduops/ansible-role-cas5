@@ -684,20 +684,20 @@ accept.authn.users=casuser::Mellon
 ##
 # Authentication delegation using pac4j
 #
-# cas.pac4j.client.authn.typedidused=true
+cas.pac4j.client.authn.typedidused={{ cas_pac4j_client_authn_typedidused }}
 # cas.pac4j.facebook.id=
 # cas.pac4j.facebook.secret=
 # cas.pac4j.facebook.scope=
 # cas.pac4j.facebook.fields=
 # cas.pac4j.twitter.id=
 # cas.pac4j.twitter.secret=
-# cas.pac4j.saml.keystorePassword=
-# cas.pac4j.saml.privateKeyPassword=
-# cas.pac4j.saml.keystorePath=
-# cas.pac4j.saml.identityProviderMetadataPath=
+cas.pac4j.saml.keystorePassword={{ cas_pac4j_saml_storepass }}
+cas.pac4j.saml.privateKeyPassword={{ cas_pac4j_saml_keypass }}
+cas.pac4j.saml.keystorePath=/etc/cas/samlKeystore.jks
+cas.pac4j.saml.identityProviderMetadataPath=/etc/cas/samlIdP.xml
 # cas.pac4j.saml.maximumAuthenticationLifetime=
-# cas.pac4j.saml.serviceProviderEntityId=
-# cas.pac4j.saml.serviceProviderMetadataPath=
+cas.pac4j.saml.serviceProviderEntityId={{ cas_pac4j_saml_entityId }}
+cas.pac4j.saml.serviceProviderMetadataPath=/etc/cas/samlSP.xml
 # cas.pac4j.cas.loginUrl=
 # cas.pac4j.cas.protocol=
 # cas.pac4j.oidc.id=
