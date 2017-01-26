@@ -43,6 +43,7 @@
   shell: >
     keytool -delete -alias "{{ item.hostname }}" -keystore "{{ cas_ca_keystore }}" -storepass "{{ cas_ca_storepass }}" -noprompt
   with_items: "{{ cas_bad_ldaps }}"
+  ignore_errors: yes
 - name: Import Bad LDAP Certificate
   shell: >
     echo -n | openssl s_client -connect "{{ item.hostname }}":"{{ item.port }}"  | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | keytool -import -trustcacerts -alias "{{ item.hostname }}" -keystore "{{ cas_ca_keystore }}" -storepass "{{ cas_ca_storepass }}" -noprompt
