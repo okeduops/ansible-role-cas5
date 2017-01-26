@@ -50,3 +50,17 @@ cas_ldap:
     userFilter: ""
     usePpolicy: "false"
     allowMultipleDns: "true"
+
+# Bad LDAPS with bad certificates that we want to import anyway.
+# Example:
+# - hostname: badldaps.localdomain
+#   port: 636
+# Not suitable for production.
+cas_bad_ldaps: []
+
+# Keystore for CA certificates
+cas_ca_keystore: /lib/jvm/jre/lib/security/cacerts
+
+# This is in fact the default value for Java on CentOS 7.
+# It's good advice too.
+cas_ca_storepass: changeit
