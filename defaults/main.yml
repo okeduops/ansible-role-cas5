@@ -1,6 +1,11 @@
 ---
 # defaults file for cas
 
+# The root user-accessible web address for CAS.
+# Impacts how CAS writes out full URLs in rendered pages.
+# Don't include '/'.
+cas_server_name: 'https://localhost:8443'
+
 # Unique ID for this CAS node
 cas_host_name: "cas01.example.org"
 
