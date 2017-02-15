@@ -29,7 +29,7 @@
 - name: Create Service Declarations
   template:
     src: ServiceDeclaration.json.j2
-    dest: "/usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services/{{ item.id }}_{{ item.file }}.json"
+    dest: "/usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services/{{ item.file }}-{{ item.id }}.json"
   with_items: cas_services
 
 - name: Use local files

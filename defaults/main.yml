@@ -24,12 +24,12 @@ cas_pac4j_client_authn_typedidused: "true"
 
 # CAS Services
 cas_services:
-  - file: "wildcard_unix_friendlyname"
+  - file: "wildCardCamelCase"
     serviceId: "^https://.*"
     name: "Wildcard"
     id: "1"
     evaluationOrder: "1"
-    description: "Wildcard service"
+    description: "Wildcard Service"
     logoutUrl: "https://web.localhost.localdomain/logout"
 
 # LDAP Backends
