@@ -23,10 +23,14 @@
       dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/spring-configuration/propertyFileConfigurer.xml
     - src: deployerConfigContext.xml.j2
       dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/deployerConfigContext.xml
-    - src: ServiceDeclaration.json.j2
-      dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services/ServiceDeclaration.json
     - src: messages.properties.j2
       dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/messages.properties
+
+- name: Create Service Declarations
+  template:
+    src: ServiceDeclaration.json.j2
+    dest: "/usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services/{{ item.id }}_{{ item.file }}.json"
+  with_items: cas_services
 
 - name: Use local files
   copy:

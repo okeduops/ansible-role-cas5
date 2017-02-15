@@ -1,19 +1,18 @@
-{% for service in cas_services %}
 {
   "@class" : "org.jasig.cas.services.RegexRegisteredService",
-  "serviceId" : "{{ service.serviceId }}",
-  "name" : "{{ service.name }}",
-  "id" : {{ loop.index0 }},
-  "description" : "{{ service.description }}",
+  "serviceId" : "{{ item.serviceId }}",
+  "name" : "{{ item.name }}",
+  "id" : {{ item.id }},
+  "description" : "{{ item.description }}",
   "proxyPolicy" : {
     "@class" : "org.jasig.cas.services.RefuseRegisteredServiceProxyPolicy"
   },
-  "evaluationOrder" : {{ loop.index0 }},
+  "evaluationOrder" : {{ item.evaluationOrder }},
   "usernameAttributeProvider" : {
     "@class" : "org.jasig.cas.services.DefaultRegisteredServiceUsernameProvider"
   },
   "logoutType" : "BACK_CHANNEL",
-  "logoutUrl" : "{{ service.logoutUrl }}",
+  "logoutUrl" : "{{ item.logoutUrl }}",
   "attributeReleasePolicy" : {
     "@class" : "org.jasig.cas.services.ReturnAllAttributeReleasePolicy",
     "authorizedToReleaseCredentialPassword" : false,
@@ -24,5 +23,4 @@
     "enabled" : true,
     "ssoEnabled" : true
   }
-}{% if not loop.last %},{% endif %}
-{% endfor %}
+}

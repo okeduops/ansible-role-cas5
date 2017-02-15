@@ -24,8 +24,11 @@ cas_pac4j_client_authn_typedidused: "true"
 
 # CAS Services
 cas_services:
-  - serviceId: "^https://.*"
+  - file: "wildcard_unix_friendlyname"
+    serviceId: "^https://.*"
     name: "Wildcard"
+    id: "1"
+    evaluationOrder: "1"
     description: "Wildcard service"
     logoutUrl: "https://web.localhost.localdomain/logout"
 
