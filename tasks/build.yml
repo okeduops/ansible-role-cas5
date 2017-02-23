@@ -55,4 +55,3 @@
     bash -c "export JAVA_HOME=/usr/lib/jvm/java && ./mvnw clean package"
   args:
     chdir: /usr/src/cas-overlay
-    creates: /usr/src/cas-overlay/target/cas.war 
