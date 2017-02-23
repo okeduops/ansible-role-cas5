@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
-                     validUntil="2016-12-31T15:28:04Z"
+		     validUntil="{{ ((ansible_date_time.year | int) + 1) | string }}-{{ ansible_date_time.month }}-{{ ansible_date_time.day }}T11:59:59Z"
                      cacheDuration="PT604800S"
                      entityID="{{ cas_pac4j_saml_entityId }}">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
