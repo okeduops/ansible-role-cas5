@@ -11,7 +11,7 @@
   "usernameAttributeProvider" : {
     "@class" : "org.jasig.cas.services.DefaultRegisteredServiceUsernameProvider"
   },
-  "logoutType" : "BACK_CHANNEL",
+  "logoutType" : "{{ item.logoutType }}",
   "logoutUrl" : "{{ item.logoutUrl }}",
   "attributeReleasePolicy" : {
     "@class" : "org.jasig.cas.services.ReturnAllAttributeReleasePolicy",

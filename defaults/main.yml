@@ -26,6 +26,7 @@ cas_pac4j_client_authn_typedidused: "true"
 cas_hide_pac4jUrls: false
 
 # CAS Services
+# See https://apereo.github.io/cas/4.2.x/installation/Service-Management.html
 cas_services:
   - file: "wildCardCamelCase"
     serviceId: "^https://.*"
@@ -34,6 +35,7 @@ cas_services:
     evaluationOrder: "1"
     description: "Wildcard Service"
     logoutUrl: "https://web.localhost.localdomain/logout"
+    logoutType: "BACK_CHANNEL"
 
 # LDAP Backends
 cas_ldap:
