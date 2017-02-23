@@ -22,6 +22,9 @@ cas_logo_title: go to Apereo home page
 cas_logout_followServiceRedirects: "false"
 cas_pac4j_client_authn_typedidused: "true"
 
+# Hides "Or login with" menu
+cas_hide_pac4jUrls: false
+
 # CAS Services
 cas_services:
   - file: "wildCardCamelCase"

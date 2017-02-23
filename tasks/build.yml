@@ -25,6 +25,8 @@
       dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/deployerConfigContext.xml
     - src: messages.properties.j2
       dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/messages.properties
+    - src: casLoginView.jsp.j2
+      dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui/casLoginView.jsp
 
 - name: Create Service Declarations
   template:
@@ -37,8 +39,6 @@
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
   with_items:
-    - src: casLoginView.jsp
-      dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui/casLoginView.jsp
     - src: top.jsp
       dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui/includes/top.jsp
     - src: bottom.jsp
