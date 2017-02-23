@@ -108,10 +108,10 @@
 <div id="sidebar">
     <div class="sidebar-content">
         <p><spring:message code="screen.welcome.security" /></p>
-{% if( cas_hide_pac4jUrls == true ) %}
-        <!--
-{% endif %}
         <c:if test="${!empty pac4jUrls}">
+{% if( cas_hide_pac4jUrls | bool == true ) %}
+           <!--
+{% endif %}
             <div id="list-providers">
                 <h3><spring:message code="screen.welcome.label.loginwith" /></h3>
                 <form>
@@ -122,10 +122,10 @@
                     </ul>
                 </form>
             </div>
-        </c:if>
-{% if( cas_hide_pac4jUrls == true ) %}
-        -->
+{% if( cas_hide_pac4jUrls | bool == true ) %}
+            -->
 {% endif %}
+        </c:if>
         <!--
         <div id="list-languages">
             <%final String queryString = request.getQueryString() == null ? "" : request.getQueryString().replaceAll("&locale=([A-Za-z][A-Za-z]_)?[A-Za-z][A-Za-z]|^locale=([A-Za-z][A-Za-z]_)?[A-Za-z][A-Za-z]", "");%>
