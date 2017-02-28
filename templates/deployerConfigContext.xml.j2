@@ -35,6 +35,7 @@
 {% for ldap in cas_ldap %}
     <bean id="ldapAuthenticationHandler{{ loop.index }}"
       class="org.jasig.cas.authentication.LdapAuthenticationHandler"
+      p:name="ldapAuthenticationHandler{{ loop.index }}"
       p:principalIdAttribute="sAMAccountName"
       c:authenticator-ref="ldap-ad-authenticator{{ loop.index }}">
       <property name="principalAttributeMap">
