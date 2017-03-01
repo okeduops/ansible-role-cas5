@@ -1,4 +1,10 @@
 ---
+
+- name: Remove Service Declaration overlay directory
+  file:
+    path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
+    state: absent
+
 - name: Ensure overlay directories exist
   file:
     path: "{{ item }}"
