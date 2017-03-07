@@ -254,9 +254,11 @@ cas.logout.followServiceRedirects={{ cas_logout_followServiceRedirects }}
 
 ##
 # File Authentication
-#
-# file.authn.filename=classpath:people.txt
-# file.authn.separator=::
+
+{% if (cas_fileauth_users is defined) %}
+file.authn.filename=classpath:people.txt
+file.authn.separator=::
+{% endif %}
 
 ##
 # General Authentication
@@ -710,6 +712,7 @@ cas.pac4j.saml.serviceProviderMetadataPath=/etc/cas/samlSP.xml
 # cas.pac4j.oidc.customParamValue1=
 # cas.pac4j.oidc.customParamKey2=
 # cas.pac4j.oidc.customParamValue2=
+{% if (cas_ldap is defined) %}
 {% for ldap in cas_ldap %}
 
 #========================================
@@ -773,3 +776,4 @@ ldap{{ loop.index }}.usePpolicy={{ ldap.usePpolicy }}
 # Allow multiple DNs during authentication?
 ldap{{ loop.index }}.allowMultipleDns={{ ldap.allowMultipleDns }}
 {% endfor %}
+{% endif %}

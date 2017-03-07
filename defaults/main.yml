@@ -37,32 +37,11 @@ cas_services:
     logoutUrl: "https://web.localhost.localdomain/logout"
     logoutType: "BACK_CHANNEL"
 
+# users defined in a cas password file:
+cas_fileauth_users: []
+
 # LDAP Backends
-cas_ldap:
-    # LDAP General
-  - url: ""
-    use_ssl: "false"
-    useStartTLS: "true"
-    rootDn: ""
-    baseDn: ""
-    managerDn: ""
-    managerPassword: ""
-    domain: ""
-    connectTimeout: 3000
-    # LDAP connection pool
-    pool_minSize: 1
-    pool_maxSize: 10
-    pool_validateOnCheckout: "false"
-    pool_validatePeriodically: "true"
-    pool_blockWaitTime: 3000
-    pool_validatePeriod: 300
-    pool_prunePeriod: 300
-    pool_idleTime: 600
-    # LDAP authentication
-    authn_searchFilter: "sAMAccountName={user}"
-    userFilter: ""
-    usePpolicy: "false"
-    allowMultipleDns: "true"
+cas_ldap: []
 
 # Bad LDAPS with bad certificates that we want to import anyway.
 # Example:

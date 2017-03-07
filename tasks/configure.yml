@@ -12,6 +12,11 @@
   template:
     src: cas.properties.j2
     dest: /etc/cas/cas.properties
+- name: Place fileauth password file
+  template:
+    src: people.txt.j2
+    dest: /etc/cas/people.txt
+  when: (cas_fileauth_users is defined)
 - name: Place SAML2 Client metadata
   template:
     src: samlSP.xml.j2

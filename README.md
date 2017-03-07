@@ -13,7 +13,37 @@ CentOS 7.x.
 Role Variables
 --------------
 
-See defaults/main.yml
+You can authenticate against multiple ldap systems.  This role currently supports authenticated search only.
+
+```
+cas_ldap:
+    # LDAP General
+  - url: ""
+    use_ssl: "false"
+    useStartTLS: "true"
+    rootDn: ""
+    baseDn: ""
+    managerDn: ""
+    managerPassword: ""
+    domain: ""
+    connectTimeout: 3000
+    # LDAP connection pool
+    pool_minSize: 1
+    pool_maxSize: 10
+    pool_validateOnCheckout: "false"
+    pool_validatePeriodically: "true"
+    pool_blockWaitTime: 3000
+    pool_validatePeriod: 300
+    pool_prunePeriod: 300
+    pool_idleTime: 600
+    # LDAP authentication
+    authn_searchFilter: "sAMAccountName={user}"
+    userFilter: ""
+    usePpolicy: "false"
+    allowMultipleDns: "true
+```
+
+See defaults/main.yml for the rest
 
 Dependencies
 ------------

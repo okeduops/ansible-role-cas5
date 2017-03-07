@@ -48,7 +48,9 @@
     </bean>
 {% endfor %}
 
-    <alias name="acceptUsersAuthenticationHandler" alias="primaryAuthenticationHandler" />
+{% if (cas_fileauth_users is defined) %}
+    <alias name="fileAuthenticationHandler" alias="primaryAuthenticationHandler" />
+{% endif %}
 
     <alias name="serviceThemeResolver" alias="themeResolver" />
 
