@@ -41,7 +41,7 @@
         <AsyncLogger  name="org.springframework" level="warn" />
         <AsyncLogger name="org.springframework.webflow" level="warn" />
         <AsyncLogger name="org.springframework.web" level="warn" />
-{% if (cas_pac4j_saml is defined) and (cas_pac4j_saml is not none) %}
+{% if ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none)) %}
         <Logger name="org.pac4j" level="warn" />
 {% endif %}
 
