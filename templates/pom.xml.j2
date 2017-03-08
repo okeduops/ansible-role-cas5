@@ -78,7 +78,7 @@
             <type>war</type>
             <scope>runtime</scope>
         </dependency>
-{% if (cas_ldap is defined) %}
+{% if ((cas_ldap is defined) and (cas_ldap is not none)) %}
         <dependency>
             <groupId>org.jasig.cas</groupId>
             <artifactId>cas-server-support-ldap</artifactId>
