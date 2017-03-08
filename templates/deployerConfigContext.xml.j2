@@ -18,8 +18,10 @@
        http://www.ldaptive.org/schema/spring-ext http://www.ldaptive.org/schema/spring-ext.xsd">
 
 
-{% if (cas_ldap is defined) %}
     <util:map id="authenticationHandlersResolvers">
+{% if (cas_fileauth_users is defined) %}
+       <entry key-ref="fileAuthenticationHandler" value="#{null}" />
+{% endif %}
 {% for ldap in cas_ldap %}
         <entry key-ref="ldapAuthenticationHandler{{ loop.index }}" value="#{null}" />
 {% endfor %}
@@ -48,7 +50,6 @@
       </property>
     </bean>
 {% endfor %}
-{% endif %}
 
 {% if (cas_fileauth_users is defined) %}
     <alias name="fileAuthenticationHandler" alias="primaryAuthenticationHandler" />
