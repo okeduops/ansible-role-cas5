@@ -16,7 +16,7 @@
   template:
     src: people.txt.j2
     dest: /etc/cas/people.txt
-  when: (cas_fileauth_users is defined)
+  when: ((cas_fileauth_users is defined) and (cas_fileauth_users is not none))
 - name: Place SAML2 Client metadata
   template:
     src: samlSP.xml.j2
