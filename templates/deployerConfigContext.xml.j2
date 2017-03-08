@@ -19,6 +19,9 @@
 
 
     <util:map id="authenticationHandlersResolvers">
+{% if ((cas_fileauth_users is defined) and (cas_fileauth_users is not none)) %}
+       <entry key-ref="fileAuthenticationHandler" value="#{null}" />
+{% endif %}
 {% for ldap in cas_ldap %}
         <entry key-ref="ldapAuthenticationHandler{{ loop.index }}" value="#{null}" />
 {% endfor %}
@@ -48,7 +51,9 @@
     </bean>
 {% endfor %}
 
-    <alias name="acceptUsersAuthenticationHandler" alias="primaryAuthenticationHandler" />
+{% if ((cas_fileauth_users is defined) and (cas_fileauth_users is not none)) %}
+    <alias name="fileAuthenticationHandler" alias="primaryAuthenticationHandler" />
+{% endif %}
 
     <alias name="serviceThemeResolver" alias="themeResolver" />
 

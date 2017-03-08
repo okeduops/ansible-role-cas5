@@ -254,9 +254,11 @@ cas.logout.followServiceRedirects={{ cas_logout_followServiceRedirects }}
 
 ##
 # File Authentication
-#
-# file.authn.filename=classpath:people.txt
-# file.authn.separator=::
+
+{% if ((cas_fileauth_users is defined) and (cas_fileauth_users is not none)) %}
+file.authn.filename=file:///etc/cas/people.txt
+file.authn.separator=::
+{% endif %}
 
 ##
 # General Authentication
@@ -684,20 +686,24 @@ cas.logout.followServiceRedirects={{ cas_logout_followServiceRedirects }}
 ##
 # Authentication delegation using pac4j
 #
+{% if ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none)) %}
 cas.pac4j.client.authn.typedidused={{ cas_pac4j_client_authn_typedidused }}
+{% endif %}
 # cas.pac4j.facebook.id=
 # cas.pac4j.facebook.secret=
 # cas.pac4j.facebook.scope=
 # cas.pac4j.facebook.fields=
 # cas.pac4j.twitter.id=
 # cas.pac4j.twitter.secret=
-cas.pac4j.saml.keystorePassword={{ cas_pac4j_saml_storepass }}
-cas.pac4j.saml.privateKeyPassword={{ cas_pac4j_saml_keypass }}
+{% if ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none)) %}
+cas.pac4j.saml.keystorePassword={{ cas_pac4j_saml.storepass }}
+cas.pac4j.saml.privateKeyPassword={{ cas_pac4j_saml.keypass }}
 cas.pac4j.saml.keystorePath=/etc/cas/samlKeystore.jks
 cas.pac4j.saml.identityProviderMetadataPath=/etc/cas/samlIdP.xml
 # cas.pac4j.saml.maximumAuthenticationLifetime=
-cas.pac4j.saml.serviceProviderEntityId={{ cas_pac4j_saml_entityId }}
+cas.pac4j.saml.serviceProviderEntityId={{ cas_pac4j_saml.entityId }}
 cas.pac4j.saml.serviceProviderMetadataPath=/etc/cas/samlSP.xml
+{% endif %}
 # cas.pac4j.cas.loginUrl=
 # cas.pac4j.cas.protocol=
 # cas.pac4j.oidc.id=
@@ -710,6 +716,7 @@ cas.pac4j.saml.serviceProviderMetadataPath=/etc/cas/samlSP.xml
 # cas.pac4j.oidc.customParamValue1=
 # cas.pac4j.oidc.customParamKey2=
 # cas.pac4j.oidc.customParamValue2=
+{% if ((cas_ldap is defined) and (cas_ldap is not none)) %}
 {% for ldap in cas_ldap %}
 
 #========================================
@@ -773,3 +780,4 @@ ldap{{ loop.index }}.usePpolicy={{ ldap.usePpolicy }}
 # Allow multiple DNs during authentication?
 ldap{{ loop.index }}.allowMultipleDns={{ ldap.allowMultipleDns }}
 {% endfor %}
+{% endif %}

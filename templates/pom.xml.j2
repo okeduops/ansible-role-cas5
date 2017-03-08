@@ -78,16 +78,27 @@
             <type>war</type>
             <scope>runtime</scope>
         </dependency>
+{% if ((cas_ldap is defined) and (cas_ldap is not none)) %}
         <dependency>
             <groupId>org.jasig.cas</groupId>
             <artifactId>cas-server-support-ldap</artifactId>
             <version>${cas.version}</version>
         </dependency>
+{% endif %}
+{% if ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none)) %}
         <dependency>
             <groupId>org.jasig.cas</groupId>
             <artifactId>cas-server-support-pac4j-webflow</artifactId>
             <version>${cas.version}</version>
         </dependency>
+{% endif %}
+{% if ((cas_fileauth_users is defined) and (cas_fileauth_users is not none)) %}
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-support-generic</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+{% endif %}
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
