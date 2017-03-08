@@ -686,7 +686,9 @@ file.authn.separator=::
 ##
 # Authentication delegation using pac4j
 #
+{% if ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none)) %}
 cas.pac4j.client.authn.typedidused={{ cas_pac4j_client_authn_typedidused }}
+{% endif %}
 # cas.pac4j.facebook.id=
 # cas.pac4j.facebook.secret=
 # cas.pac4j.facebook.scope=
