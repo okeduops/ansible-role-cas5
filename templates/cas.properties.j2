@@ -256,7 +256,7 @@ cas.logout.followServiceRedirects={{ cas_logout_followServiceRedirects }}
 # File Authentication
 
 {% if (cas_fileauth_users is defined) %}
-file.authn.filename=classpath:people.txt
+file.authn.filename=/etc/cas/people.txt
 file.authn.separator=::
 {% endif %}
 
