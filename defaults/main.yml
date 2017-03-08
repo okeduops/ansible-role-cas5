@@ -25,6 +25,9 @@ cas_pac4j_client_authn_typedidused: "true"
 # Hides "Or login with" menu
 cas_hide_pac4jUrls: false
 
+# SAML client config
+cas_pac4j_saml:
+
 # CAS Services
 # See https://apereo.github.io/cas/4.2.x/installation/Service-Management.html
 cas_services:

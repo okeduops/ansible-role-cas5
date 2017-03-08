@@ -2,18 +2,18 @@
 <md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
 		     validUntil="{{ ((ansible_date_time.year | int) + 1) | string }}-{{ ansible_date_time.month }}-{{ ansible_date_time.day }}T11:59:59Z"
                      cacheDuration="PT604800S"
-                     entityID="{{ cas_pac4j_saml_entityId }}">
+                     entityID="{{ cas_pac4j_saml.entityId }}">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
         <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-                                Location="{{ cas_pac4j_saml_logoutLocation }}" />
+                                Location="{{ cas_pac4j_saml.logoutLocation }}" />
         <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
         <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
-                                     Location="{{ cas_pac4j_saml_consumerLocation }}"
+                                     Location="{{ cas_pac4j_saml.consumerLocation }}"
                                      index="1" />
     </md:SPSSODescriptor>
     <md:Organization>
-       <md:OrganizationName xml:lang="en-US">{{ cas_pac4j_saml_orgName }}</md:OrganizationName>
-       <md:OrganizationDisplayName xml:lang="en-US">{{ cas_pac4j_saml_orgDisplayname }}</md:OrganizationDisplayName>
-       <md:OrganizationURL xml:lang="en-US">{{ cas_pac4j_saml_orgURL }}</md:OrganizationURL>
+       <md:OrganizationName xml:lang="en-US">{{ cas_pac4j_saml.orgName }}</md:OrganizationName>
+       <md:OrganizationDisplayName xml:lang="en-US">{{ cas_pac4j_saml.orgDisplayname }}</md:OrganizationDisplayName>
+       <md:OrganizationURL xml:lang="en-US">{{ cas_pac4j_saml.orgURL }}</md:OrganizationURL>
     </md:Organization>
 </md:EntityDescriptor>
