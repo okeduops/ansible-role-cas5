@@ -12,7 +12,7 @@ CentOS 7.x.
 
 Role Variables
 --------------
-You can authenticate against a simple filestore with username::password combinations. Stores credentials in the clear. Don't use in production.
+You can optionally authenticate against a simple filestore with username::password combinations. Stores credentials in the clear. Don't use in production.
 
 ```
 cas_fileauth_users:
@@ -20,7 +20,7 @@ cas_fileauth_users:
     password: userpassword
 ```
 
-You can authenticate against multiple ldap systems.  This role currently supports authenticated search only.
+You can optionally authenticate against multiple ldap systems.  This role currently supports authenticated search only.
 
 ```
 cas_ldap:
@@ -50,7 +50,7 @@ cas_ldap:
     allowMultipleDns: "true
 ```
 
-You can configure CAS to act as a client against a SAML ID provider. Learn about CAS and SAML to discover how to configure these values.
+You can optionally configure CAS to act as a client against a SAML ID provider. Learn about CAS and SAML to discover how to configure these values.
 
 ```
 cas_pac4j_saml:
