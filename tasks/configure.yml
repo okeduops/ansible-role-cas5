@@ -21,12 +21,12 @@
   template:
     src: samlSP.xml.j2
     dest: /etc/cas/samlSP.xml
-  when: (cas_pac4j_saml is defined)
+  when: ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none))
 - name: Fetch SAML2 Client IdP Metadata
   get_url:
     url: "{{ cas_pac4j_saml.idp_md_url }}"
     dest: /etc/cas/samlIdP.xml
-  when: (cas_pac4j_saml is defined)
+  when: ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none))
 - name: Place CAS log config
   template:
     src: log4j2.xml.j2
@@ -46,7 +46,7 @@
      keytool -genkeypair -alias pac4j-demo -keypass "{{ cas_pac4j_saml.keypass }}" -keystore /etc/cas/samlKeystore.jks -storepass "{{ cas_pac4j_saml.storepass }}" -dname "{{ cas_pac4j_saml.dname }}" -keyalg RSA -keysize 2048 -validity 3650
   args:
     creates: /etc/cas/samlKeystore.jks
-  when: (cas_pac4j_saml is defined)
+  when: ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none))
 - name: Delete Bad LDAP Certificate
   shell: >
     keytool -delete -alias "{{ item.hostname }}" -keystore "{{ cas_ca_keystore }}" -storepass "{{ cas_ca_storepass }}" -noprompt

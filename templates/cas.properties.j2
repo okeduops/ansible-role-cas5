@@ -693,7 +693,7 @@ cas.pac4j.client.authn.typedidused={{ cas_pac4j_client_authn_typedidused }}
 # cas.pac4j.facebook.fields=
 # cas.pac4j.twitter.id=
 # cas.pac4j.twitter.secret=
-{% if (cas_pac4j_saml is defined) %}
+{% if ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none)) %}
 cas.pac4j.saml.keystorePassword={{ cas_pac4j_saml.storepass }}
 cas.pac4j.saml.privateKeyPassword={{ cas_pac4j_saml.keypass }}
 cas.pac4j.saml.keystorePath=/etc/cas/samlKeystore.jks
