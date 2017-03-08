@@ -85,11 +85,13 @@
             <version>${cas.version}</version>
         </dependency>
 {% endif %}
+{% if ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none)) %}
         <dependency>
             <groupId>org.jasig.cas</groupId>
             <artifactId>cas-server-support-pac4j-webflow</artifactId>
             <version>${cas.version}</version>
         </dependency>
+{% endif %}
 {% if ((cas_fileauth_users is defined) and (cas_fileauth_users is not none)) %}
         <dependency>
             <groupId>org.jasig.cas</groupId>
