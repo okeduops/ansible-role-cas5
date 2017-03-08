@@ -78,16 +78,25 @@
             <type>war</type>
             <scope>runtime</scope>
         </dependency>
+{% if (cas_ldap is defined) %}
         <dependency>
             <groupId>org.jasig.cas</groupId>
             <artifactId>cas-server-support-ldap</artifactId>
             <version>${cas.version}</version>
         </dependency>
+{% endif %}
         <dependency>
             <groupId>org.jasig.cas</groupId>
             <artifactId>cas-server-support-pac4j-webflow</artifactId>
             <version>${cas.version}</version>
         </dependency>
+{% if (cas_fileauth_users is defined) %}
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-support-generic</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+{% endif %}
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
