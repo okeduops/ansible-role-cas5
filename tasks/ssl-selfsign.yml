@@ -8,13 +8,13 @@
     path: "{{ ssl_key_path }}/localhost"
     state: directory
 - name: Generate a self-signed cert.
-  sudo: yes
+  become: true
   command: >
      openssl req -newkey rsa:2048 -nodes -sha256 -x509 -subj "/CN=localhost" -days 90 -keyout "{{ ssl_key_path }}"/localhost/privkey.pem -out "{{ ssl_cert_path }}"/localhost/cert.pem
   args:
     creates: "{{ ssl_key_path }}/localhost/privkey.pem"
 - name: Create a dummy chain file
-  sudo: yes
+  become: true
   shell: >
     echo \# > "{{ ssl_cert_path }}/localhost/chain.pem"
   args:

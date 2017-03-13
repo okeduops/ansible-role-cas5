@@ -41,7 +41,7 @@
     line: >
       JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC"
 - name: Generate a cert keystore for SAML2 Client
-  sudo: yes
+  become: true
   command: >
      keytool -genkeypair -alias pac4j-demo -keypass "{{ cas_pac4j_saml.keypass }}" -keystore /etc/cas/samlKeystore.jks -storepass "{{ cas_pac4j_saml.storepass }}" -dname "{{ cas_pac4j_saml.dname }}" -keyalg RSA -keysize 2048 -validity 3650
   args:

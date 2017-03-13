@@ -1,16 +1,16 @@
 ---
 # tasks file for cas
 - include: yum.yml
-  sudo: yes
+  become: true
 - include: ssl-selfsign.yml
-  sudo: yes
+  become: true
 - include: source.yml
-  sudo: yes
+  become: true
 - include: build.yml
-  sudo: yes
+  become: true
 - include: configure.yml
-  sudo: yes
+  become: true
 - include: deploy.yml
-  sudo: yes
+  become: true
 - include: services.yml
-  sudo: yes
+  become: true
