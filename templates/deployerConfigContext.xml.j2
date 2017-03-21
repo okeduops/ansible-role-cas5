@@ -93,7 +93,7 @@
         allowMultipleDns="${ldap{{ loop.index }}.allowMultipleDns:false}"
         connectTimeout="${ldap{{ loop.index }}.connectTimeout}"
         validateOnCheckOut="${ldap{{ loop.index }}.pool.validateOnCheckout}"
-        failFastInitialize="true"
+        failFastInitialize="${ldap{{ loop.index }}.failFastInitialize:true}"
         blockWaitTime="${ldap{{ loop.index }}.pool.blockWaitTime}"
         idleTime="${ldap{{ loop.index }}.pool.idleTime}"
         baseDn="${ldap{{ loop.index }}.baseDn}"

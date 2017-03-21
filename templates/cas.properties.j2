@@ -777,6 +777,9 @@ ldap{{ loop.index }}.domain={{ ldap.domain }}
 # Should LDAP Password Policy be enabled?
 ldap{{ loop.index }}.usePpolicy={{ ldap.usePpolicy }}
 
+# Should initialization fail if we can't talk to this backend?
+ldap{{ loop.index }}.failFastInitialize={{ ldap.failFastInitialize }}
+
 # Allow multiple DNs during authentication?
 ldap{{ loop.index }}.allowMultipleDns={{ ldap.allowMultipleDns }}
 {% endfor %}
