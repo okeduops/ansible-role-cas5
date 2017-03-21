@@ -15,7 +15,7 @@ ssl_key_path: /etc/pki/tls/private
 
 # UI
 cas_screen_welcome_instructions: Login with your OUNetID (4x4)
-cas_screen_welcome_security: For security reasons, please Log Out and Exit your web browser when you are done accessing services that require authentication!
+cas_screen_welcome_security:
 cas_logo_title: go to Apereo home page
 
 # Miscellaneous
