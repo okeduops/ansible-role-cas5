@@ -47,7 +47,8 @@ cas_ldap:
     authn_searchFilter: "sAMAccountName={user}"
     userFilter: ""
     usePpolicy: "false"
-    allowMultipleDns: "true
+    allowMultipleDns: "true"
+    failFastInitialize: "true"
 ```
 
 You can optionally configure CAS to act as a client against a SAML ID provider. Learn about CAS and SAML to discover how to configure these values.
