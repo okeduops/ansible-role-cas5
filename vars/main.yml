@@ -1,2 +1,4 @@
 ---
 # vars file for cas
+
+cas_screen_welcome_instructions: Login with your OUNetID (4x4)
