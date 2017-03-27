@@ -14,7 +14,7 @@ ssl_cert_path: /etc/pki/tls/certs
 ssl_key_path: /etc/pki/tls/private
 
 # UI
-cas_screen_welcome_instructions: Login with your OUNetID (4x4)
+cas_screen_welcome_instructions: Login with your OUNetID (4x4
 cas_screen_welcome_security:
 cas_logo_title: go to Apereo home page
 
