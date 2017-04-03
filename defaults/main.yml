@@ -26,7 +26,7 @@ cas_pac4j_client_authn_typedidused: "true"
 cas_hide_pac4jUrls: false
 
 # SAML client config
-cas_pac4j_saml:
+cas_pac4j_saml: !!null
 
 # CAS Services
 # See https://apereo.github.io/cas/4.2.x/installation/Service-Management.html
@@ -41,17 +41,17 @@ cas_services:
     logoutType: "BACK_CHANNEL"
 
 # users defined in a cas password file:
-cas_fileauth_users: []
+cas_fileauth_users: !!null
 
 # LDAP Backends
-cas_ldap: []
+cas_ldap: !!null
 
 # Bad LDAPS with bad certificates that we want to import anyway.
 # Example:
 # - hostname: badldaps.localdomain
 #   port: 636
 # Not suitable for production.
-cas_bad_ldaps: []
+cas_bad_ldaps: !!null
 
 # Keystore for CA certificates
 cas_ca_keystore: /lib/jvm/jre/lib/security/cacerts
