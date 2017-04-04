@@ -1,5 +1,32 @@
 ---
 
+- name: Build JSON Web Key Generator
+  shell: >
+    bash -c "mvn clean package"
+  args:
+    chdir: /usr/src/json-web-key-generator
+    creates: /usr/src/json-web-key-generator/target/json-web-key-generator-0.3-jar-with-dependencies.jar
+  environment:
+    JAVA_HOME: /usr/lib/jvm/java
+
+- name: Generate session cookie secret key
+  shell: >
+    bash -c "java -jar json-web-key-generator-0.3-jar-with-dependencies.jar -t oct -s 256 -o /etc/cas/tgc.secret.key.json"
+  args:
+    chdir: /usr/src/json-web-key-generator/target
+    creates: /etc/cas/tgc.secret.key.json
+  environment:
+    JAVA_HOME: /usr/lib/jvm/java
+
+- name: Generate session cookie signing key
+  shell: >
+    bash -c "java -jar json-web-key-generator-0.3-jar-with-dependencies.jar -t oct -s 512 -o /etc/cas/tgc.signing.key.json"
+  args:
+    chdir: /usr/src/json-web-key-generator/target
+    creates: /etc/cas/tgc.signing.key.json
+  environment:
+    JAVA_HOME: /usr/lib/jvm/java
+
 - name: Remove Service Declaration overlay directory
   file:
     path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
@@ -58,13 +85,8 @@
 
 - name: Build CAS
   shell: >
-    bash -c "export JAVA_HOME=/usr/lib/jvm/java && ./mvnw clean package"
+    bash -c "./mvnw clean package"
   args:
     chdir: /usr/src/cas-overlay
-
-- name: Build JSON Web Key Generator
-  shell: >
-    bash -c "export JAVA_HOME=/usr/lib/jvm/java && mvn clean package"
-  args:
-    chdir: /usr/src/json-web-key-generator
-    creates: /usr/src/json-web-key-generator/target/json-web-key-generator-0.3-jar-with-dependencies.jar
+  environment:
+    JAVA_HOME: /usr/lib/jvm/java

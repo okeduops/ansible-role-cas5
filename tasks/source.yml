@@ -1,14 +1,15 @@
 ---
-- name: CAS Maven Overlay
-  git:
-    repo: https://github.com/apereo/cas-overlay-template.git
-    dest: /usr/src/cas-overlay
-    version: 4.1
-    force: yes
 
 - name: JSON Web Key Generator
   git:
     repo: https://github.com/mitreid-connect/json-web-key-generator.git
     dest: /usr/src/json-web-key-generator
     version: json-web-key-generator-0.3
+    force: yes
+
+- name: CAS Maven Overlay
+  git:
+    repo: https://github.com/apereo/cas-overlay-template.git
+    dest: /usr/src/cas-overlay
+    version: 4.1
     force: yes
