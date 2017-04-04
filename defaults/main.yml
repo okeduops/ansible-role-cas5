@@ -18,6 +18,21 @@ cas_screen_welcome_instructions: Enter your Username and Password
 cas_screen_welcome_security: For security reasons, please Log Out and Exit your web browser when you are done accessing services that require authentication!
 cas_logo_title: go to Apereo home page
 
+# Expiration policies
+# https://apereo.github.io/cas/4.2.x/installation/Configuring-Ticket-Expiration-Policy.html
+
+# CAS session hard expiration (seconds)
+# Sessions should always die after this period, regardless of activity
+cas_tgt_hard_max: 86400
+
+# CAS session maximum time to live (seconds)
+# Regular ol' inactivity period
+cas_tgt_ttl: 28800
+
+# CAS session maximum time to kill (seconds)
+# Before this expires, clients can renew their session without reauthenticating
+cas_tgt_ttk: 7200
+
 # Miscellaneous
 cas_logout_followServiceRedirects: "false"
 cas_pac4j_client_authn_typedidused: "true"

@@ -307,18 +307,18 @@ file.authn.separator=::
 # Single Sign-On Session TGT Timeouts
 #
 # Inactivity Timeout Policy
-# tgt.timeout.maxTimeToLiveInSeconds=28800
+tgt.timeout.maxTimeToLiveInSeconds={{ cas_tgt_ttl }}
 
 # Hard Timeout Policy
-# tgt.timeout.hard.maxTimeToLiveInSeconds
+tgt.timeout.hard.maxTimeToLiveInSeconds={{ cas_tgt_hard_max }}
 #
 # Throttled Timeout Policy
-# tgt.throttled.maxTimeToLiveInSeconds=28800
-# tgt.throttled.timeInBetweenUsesInSeconds=5
+tgt.throttled.maxTimeToLiveInSeconds={{ cas_tgt_ttl }}
+tgt.throttled.timeInBetweenUsesInSeconds=5
 
 # Default Expiration Policy
-# tgt.maxTimeToLiveInSeconds=28800
-# tgt.timeToKillInSeconds=7200
+tgt.maxTimeToLiveInSeconds={{ cas_tgt_ttl }}
+tgt.timeToKillInSeconds={{ cas_tgt_ttk }}
 
 ##
 # Service Ticket Timeout
