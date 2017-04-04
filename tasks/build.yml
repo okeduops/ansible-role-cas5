@@ -61,3 +61,10 @@
     bash -c "export JAVA_HOME=/usr/lib/jvm/java && ./mvnw clean package"
   args:
     chdir: /usr/src/cas-overlay
+
+- name: Build JSON Web Key Generator
+  shell: >
+    bash -c "export JAVA_HOME=/usr/lib/jvm/java && mvn clean package"
+  args:
+    chdir: /usr/src/json-web-key-generator
+    creates: /usr/src/json-web-key-generator/target/json-web-key-generator-0.3-jar-with-dependencies.jar
