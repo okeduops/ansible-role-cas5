@@ -22,9 +22,11 @@
 {% if ((cas_fileauth_users is defined) and (cas_fileauth_users is not none)) %}
        <entry key-ref="fileAuthenticationHandler" value="#{null}" />
 {% endif %}
+{% if ((cas_ldap is defined) and (cas_ldap is not none)) %}
 {% for ldap in cas_ldap %}
         <entry key-ref="ldapAuthenticationHandler{{ loop.index }}" value="#{null}" />
 {% endfor %}
+{% endif %}
 
     </util:map>
 
@@ -35,6 +37,7 @@
 
     <bean id="attributeRepository" class="org.jasig.services.persondir.support.NamedStubPersonAttributeDao" />
 
+{% if ((cas_ldap is defined) and (cas_ldap is not none)) %}
 {% for ldap in cas_ldap %}
     <bean id="ldapAuthenticationHandler{{ loop.index }}"
       class="org.jasig.cas.authentication.LdapAuthenticationHandler"
@@ -50,6 +53,7 @@
       </property>
     </bean>
 {% endfor %}
+{% endif %}
 
 {% if ((cas_fileauth_users is defined) and (cas_fileauth_users is not none)) %}
     <alias name="fileAuthenticationHandler" alias="primaryAuthenticationHandler" />
@@ -84,6 +88,7 @@
     <alias name="defaultPrincipalElectionStrategy" alias="principalElectionStrategy" />
     <alias name="tgcCipherExecutor" alias="defaultCookieCipherExecutor" />
 
+{% if ((cas_ldap is defined) and (cas_ldap is not none)) %}
 {% for ldap in cas_ldap %}
     <ldaptive:ad-authenticator id="ldap-ad-authenticator{{ loop.index }}"
         ldapUrl="${ldap{{ loop.index }}.url}"
@@ -107,5 +112,6 @@
         useStartTLS="${ldap{{ loop.index }}.useStartTLS}"
     />
 {% endfor %}
+{% endif %}
 
 </beans>
