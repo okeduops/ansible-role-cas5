@@ -79,40 +79,40 @@ host.name={{ cas_host_name }}
 # Do note that the following settings MUST be generated per deployment.
 #
 # The encryption secret key. By default, must be a octet string of size 256.
-# tgc.encryption.key={{ cas_tgc_encryption_key }}
+tgc.encryption.key={{ cas_tgc_encryption_key }}
 
 # The signing secret key. By default, must be a octet string of size 512.
-# tgc.signing.key={{ cas_tgc_signing_key }}
+tgc.signing.key={{ cas_tgc_signing_key }}
 
 # Decides whether SSO cookie should be created only under secure connections.
-# tgc.secure=true
+tgc.secure=true
 
 # The expiration value of the SSO cookie
-# tgc.maxAge=-1
+tgc.maxAge=-1
 
 # The name of the SSO cookie
-# tgc.name=TGC
+tgc.name=TGC
 
 # The path to which the SSO cookie will be scoped
-# tgc.path=/cas
+tgc.path=/
 
 # The expiration value of the SSO cookie for long-term authentications
 # tgc.remember.me.maxAge=1209600
 
 # Decides whether SSO Warning cookie should be created only under secure connections.
-# warn.cookie.secure=true
+warn.cookie.secure=true
 
 # The expiration value of the SSO Warning cookie
-# warn.cookie.maxAge=-1
+warn.cookie.maxAge=-1
 
 # The name of the SSO Warning cookie
-# warn.cookie.name=CASPRIVACY
+warn.cookie.name=CASPRIVACY
 
 # The path to which the SSO Warning cookie will be scoped
-# warn.cookie.path=/cas
+warn.cookie.path=/
 
 # Whether we should track the most recent session by keeping the latest service ticket
-# tgt.onlyTrackMostRecentSession = true
+tgt.onlyTrackMostRecentSession = true
 
 ##
 # CAS UI Theme Resolution
