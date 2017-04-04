@@ -1,7 +1,7 @@
 ---
 
 - name: Build JSON Web Key Generator
-  shell: >
+  command: >
     bash -c "mvn clean package"
   args:
     chdir: /usr/src/json-web-key-generator
@@ -9,23 +9,37 @@
   environment:
     JAVA_HOME: /usr/lib/jvm/java
 
-- name: Generate session cookie secret key
-  shell: >
-    bash -c "java -jar json-web-key-generator-0.3-jar-with-dependencies.jar -t oct -s 256 -o /etc/cas/tgc.secret.key.json"
+- name: Generate cookie keys
+  command: >
+   java -jar json-web-key-generator-0.3-jar-with-dependencies.jar -t oct -s "{{ item.size }}" -o /etc/cas/"{{ item.name }}".json
   args:
     chdir: /usr/src/json-web-key-generator/target
-    creates: /etc/cas/tgc.secret.key.json
+    creates: "/etc/cas/{{ item.name}}.json"
   environment:
     JAVA_HOME: /usr/lib/jvm/java
+  with_items:
+    - name: tgc.encryption.key
+      size: 256
+    - name: tgc.signing.key
+      size: 512
 
-- name: Generate session cookie signing key
+- name: Get cookie encryption key value
   shell: >
-    bash -c "java -jar json-web-key-generator-0.3-jar-with-dependencies.jar -t oct -s 512 -o /etc/cas/tgc.signing.key.json"
-  args:
-    chdir: /usr/src/json-web-key-generator/target
-    creates: /etc/cas/tgc.signing.key.json
-  environment:
-    JAVA_HOME: /usr/lib/jvm/java
+   cat /etc/cas/tgc.encryption.key.json | jq --raw-output '.k'
+  register: cas_tgc_encryption_key
+
+- name: Set encryption key value as fact
+  set_fact:
+    cas_tgc_encryption_key: "{{ cas_tgc_encryption_key.stdout }}"
+
+- name: Get cookie signing key value
+  shell: >
+   cat /etc/cas/tgc.signing.key.json | jq --raw-output '.k'
+  register: cas_tgc_signing_key
+
+- name: Set signing key value as fact
+  set_fact:
+    cas_tgc_signing_key: "{{ cas_tgc_signing_key.stdout }}"
 
 - name: Remove Service Declaration overlay directory
   file:
@@ -84,8 +98,8 @@
       dest: /usr/src/cas-overlay/src/main/webapp/js/cas.js
 
 - name: Build CAS
-  shell: >
-    bash -c "./mvnw clean package"
+  command: >
+    ./mvnw clean package
   args:
     chdir: /usr/src/cas-overlay
   environment:
