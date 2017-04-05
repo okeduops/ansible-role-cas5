@@ -17,6 +17,9 @@ ssl_key_path: /etc/pki/tls/private
 cas_screen_welcome_instructions: Enter your Username and Password
 cas_screen_welcome_security: For security reasons, please Log Out and Exit your web browser when you are done accessing services that require authentication!
 cas_logo_title: go to Apereo home page
+cas_screen_label_netid: '<span class="accesskey">U</span>sername:'
+cas_screen_label_accesskey: u
+cas_authenticationFailure_AccountNotFoundException: Invalid Credendtials
 
 # Miscellaneous
 cas_logout_followServiceRedirects: "false"
@@ -60,8 +63,3 @@ cas_ca_keystore: /lib/jvm/jre/lib/security/cacerts
 # It's good advice too.
 cas_ca_storepass: changeit
 
-# The default text for username
-cas_screen_label_netid: '<span class="accesskey">U</span>sername:'
-
-# keyboard shortcut accesskey
-cas_screen_label_accesskey: u
