@@ -134,6 +134,7 @@ header h1 {
     color: black;
     padding-left: 10px;
     padding-top: 5px;
+    display: none;
 }
 
 #servicedesc {
