@@ -1,5 +1,15 @@
 ---
 
+- name: Ensure Directories exist
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: wheel
+    mode: 0775
+  with_items:
+    - /etc/cas
+
 - name: Build JSON Web Key Generator
   command: >
     bash -c "mvn clean package"
