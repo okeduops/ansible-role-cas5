@@ -92,7 +92,7 @@ Example Playbook
 License
 -------
 
-TBD
+[MIT](https://github.com/OULibraries/ansible-role-cas/blob/master/LICENSE)
 
 Author Information
 ------------------
