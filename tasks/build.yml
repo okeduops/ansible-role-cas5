@@ -89,7 +89,8 @@
   template:
     src: ServiceDeclaration.json.j2
     dest: "/usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services/{{ item.file }}-{{ item.id }}.json"
-  with_items: cas_services
+  with_items:
+    - "{{ cas_services }}"
 
 - name: Use local files
   copy:
