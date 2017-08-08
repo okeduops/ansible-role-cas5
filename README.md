@@ -20,6 +20,18 @@ cas_fileauth_users:
     password: userpassword
 ```
 
+You can optionally configure CAS to build with a custom overlay based
+on [overlay template](https://github.com/apereo/cas-overlay-template)
+from Apereo by specifying a git repository for the template and the
+version to use.
+
+```
+cas_overlay_repo: 
+cas_overlay_version: 
+```
+
+
+
 You can optionally authenticate against multiple ldap systems.  This role currently supports authenticated search only.
 
 ```
