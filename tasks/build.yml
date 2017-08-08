@@ -56,6 +56,12 @@
     path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
     state: absent
 
+- name: Ensure empty Service Declaration overlay directory exists
+  file:
+    path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
+    state: directory
+    recurse: "yes"
+
 - name: Configure overlay using role templates
   template:
     src: "{{ item.src }}"
