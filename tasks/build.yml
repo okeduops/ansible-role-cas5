@@ -56,20 +56,7 @@
     path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
     state: absent
 
-- name: Ensure overlay directories exist
-  file:
-    path: "{{ item }}"
-    state: directory
-    recurse: yes
-  with_items:
-    - /usr/src/cas-overlay/src/main/webapp/WEB-INF/spring-configuration
-    - /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
-    - /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui/includes
-    - /usr/src/cas-overlay/src/main/webapp/css
-    - /usr/src/cas-overlay/src/main/webapp/images
-    - /usr/src/cas-overlay/src/main/webapp/js
-
-- name: Use local templates
+- name: Configure overlay using role templates
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -91,22 +78,6 @@
     dest: "/usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services/{{ item.file }}-{{ item.id }}.json"
   with_items:
     - "{{ cas_services }}"
-
-- name: Use local files
-  copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-  with_items:
-    - src: top.jsp
-      dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui/includes/top.jsp
-    - src: bottom.jsp
-      dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui/includes/bottom.jsp
-    - src: cas.css
-      dest: /usr/src/cas-overlay/src/main/webapp/css/cas.css
-    - src: logo.png
-      dest: /usr/src/cas-overlay/src/main/webapp/images/logo.png
-    - src: cas.js
-      dest: /usr/src/cas-overlay/src/main/webapp/js/cas.js
 
 - name: Build CAS
   command: >
