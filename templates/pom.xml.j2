@@ -87,6 +87,13 @@
             <version>${cas.version}</version>
         </dependency>
 {% endif %}
+{% if ((cas_saml2_idp is defined) and (cas_saml2_idp is not none)) %}
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-saml-idp</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+{% endif %}
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
