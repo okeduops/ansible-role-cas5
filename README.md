@@ -30,6 +30,12 @@ cas_overlay_repo:
 cas_overlay_version: 
 ```
 
+You can optionally enable a [SAML2 Identity Provider](https://apereo.github.io/cas/5.0.x/installation/Configuring-SAML2-Authentication.html) service in cas.
+To do so, set:
+```
+cas_saml2_idp: true
+```
+
 
 
 You can optionally authenticate against multiple ldap systems.  This role currently supports authenticated search only.
