@@ -52,22 +52,28 @@
   set_fact:
     cas_tgc_signing_key: "{{ cas_tgc_signing_key.stdout }}"
 
-- name: Remove Service Declaration overlay directory
+- name: Remove service declaration overlay directory
   file:
     path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
     state: absent
 
-- name: Ensure empty Service Declaration overlay directory exists
+- name: Ensure empty service declaration overlay directory exists
   file:
     path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
     state: directory
-    recurse: "yes"
+    recurse: yes
 
-- name: Ensure empty spring configuration overlay directory exists
+- name: Ensure spring configuration overlay directory exists
   file:
     path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/spring-configuration
     state: directory
-    recurse: "yes"
+    recurse: yes
+
+- name: Ensure jsp ui overlay directory exists
+  file:
+    path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui
+    state: directory
+    recurse: yes
 
 - name: Configure overlay using role templates
   template:
