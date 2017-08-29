@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd ">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.jasig.cas</groupId>
+    <groupId>org.apereo.cas</groupId>
     <artifactId>cas-overlay</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
@@ -11,9 +11,22 @@
     <build>
         <plugins>
             <plugin>
-          		 <groupId>com.rimerosolutions.maven.plugins</groupId>
-          		 <artifactId>wrapper-maven-plugin</artifactId>
-          		 <version>0.0.4</version>
+                <groupId>com.rimerosolutions.maven.plugins</groupId>
+                <artifactId>wrapper-maven-plugin</artifactId>
+                <version>0.0.4</version>
+                <configuration>
+                    <verifyDownload>true</verifyDownload>
+                    <checksumAlgorithm>MD5</checksumAlgorithm>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${springboot.version}</version>
+                <configuration>
+                    <mainClass>org.springframework.boot.loader.WarLauncher</mainClass>
+                    <addResources>true</addResources>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -21,16 +34,17 @@
                 <version>2.6</version>
                 <configuration>
                     <warName>cas</warName>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <recompressZippedFiles>false</recompressZippedFiles>
+                    <archive>
+                        <compress>false</compress>
+                        <manifestFile>${project.build.directory}/war/work/org.apereo.cas/cas-server-webapp/META-INF/MANIFEST.MF
+                        </manifestFile>
+                    </archive>
                     <overlays>
                         <overlay>
-                            <groupId>org.jasig.cas</groupId>
+                            <groupId>org.apereo.cas</groupId>
                             <artifactId>cas-server-webapp</artifactId>
-                            <excludes>
-                                <exclude>WEB-INF/cas.properties</exclude>
-                                <exclude>WEB-INF/classes/log4j2.xml</exclude>
-                                <exclude>WEB-INF/classes/services/HTTPSandIMAPS-10000001.json</exclude>
-                                <exclude>WEB-INF/classes/services/Apereo-10000002.json</exclude>
-                            </excludes>
                         </overlay>
                     </overlays>
                 </configuration>
@@ -39,32 +53,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${maven-jetty-plugin.version}</version>
-                <configuration>
-                    <jettyXml>${basedir}/etc/jetty/jetty.xml,${basedir}/etc/jetty/jetty-ssl.xml,${basedir}/etc/jetty/jetty-https.xml</jettyXml>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>org.eclipse.jetty.annotations.maxWait</name>
-                            <value>240</value>
-                        </systemProperty>
-                    </systemProperties>
-                    <webApp>
-                        <contextPath>/cas</contextPath>
-                        <overrideDescriptor>${basedir}/etc/jetty/web.xml</overrideDescriptor>
-                    </webApp>
-	                <webAppConfig>
-	                    <allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
-	                </webAppConfig>
-                    <jvmArgs>-Dlog4j.configurationFile=/etc/cas/log4j2.xml -Xdebug -Xrunjdwp:transport=dt_socket,address=5000,server=y,suspend=n</jvmArgs>
-                </configuration>
             </plugin>
         </plugins>
         <finalName>cas</finalName>
@@ -72,7 +60,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.jasig.cas</groupId>
+            <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-webapp</artifactId>
             <version>${cas.version}</version>
             <type>war</type>
@@ -80,21 +68,21 @@
         </dependency>
 {% if ((cas_ldap is defined) and (cas_ldap is not none)) %}
         <dependency>
-            <groupId>org.jasig.cas</groupId>
+            <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-ldap</artifactId>
             <version>${cas.version}</version>
         </dependency>
 {% endif %}
 {% if ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none)) %}
         <dependency>
-            <groupId>org.jasig.cas</groupId>
+            <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-pac4j-webflow</artifactId>
             <version>${cas.version}</version>
         </dependency>
 {% endif %}
 {% if ((cas_fileauth_users is defined) and (cas_fileauth_users is not none)) %}
         <dependency>
-            <groupId>org.jasig.cas</groupId>
+            <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-generic</artifactId>
             <version>${cas.version}</version>
         </dependency>
@@ -107,21 +95,75 @@
     </dependencies>
 
     <properties>
-        <cas.version>4.2.4</cas.version>
-        <maven-jetty-plugin.version>9.3.6.v20151106</maven-jetty-plugin.version>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <cas.version>5.0.8</cas.version>
+        <springboot.version>1.4.2.RELEASE</springboot.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
 
     <repositories>
         <repository>
             <id>sonatype-releases</id>
             <url>http://oss.sonatype.org/content/repositories/releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
         </repository>
         <repository>
             <id>sonatype-snapshots</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>shibboleth-releases</id>
+            <url>https://build.shibboleth.net/nexus/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <url>https://repo.spring.io/milestone</url>
         </repository>
     </repositories>
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <id>pgp</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.s4u.plugins</groupId>
+                        <artifactId>pgpverify-maven-plugin</artifactId>
+                        <version>1.1.0</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <pgpKeyServer>hkp://pool.sks-keyservers.net</pgpKeyServer>
+                            <pgpKeysCachePath>${settings.localRepository}/pgpkeys-cache</pgpKeysCachePath>
+                            <scope>test</scope>
+                            <verifyPomFiles>true</verifyPomFiles>
+                            <failNoSignature>false</failNoSignature>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>

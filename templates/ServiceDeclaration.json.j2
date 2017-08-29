@@ -1,25 +1,25 @@
 {
-  "@class" : "org.jasig.cas.services.RegexRegisteredService",
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
   "serviceId" : "{{ item.serviceId }}",
   "name" : "{{ item.name }}",
   "id" : {{ item.id }},
   "description" : "{{ item.description }}",
   "proxyPolicy" : {
-    "@class" : "org.jasig.cas.services.RefuseRegisteredServiceProxyPolicy"
+    "@class" : "org.apereo.cas.services.RefuseRegisteredServiceProxyPolicy"
   },
   "evaluationOrder" : {{ item.evaluationOrder }},
   "usernameAttributeProvider" : {
-    "@class" : "org.jasig.cas.services.DefaultRegisteredServiceUsernameProvider"
+    "@class" : "org.apereo.cas.services.DefaultRegisteredServiceUsernameProvider"
   },
   "logoutType" : "{{ item.logoutType }}",
   "logoutUrl" : "{{ item.logoutUrl }}",
   "attributeReleasePolicy" : {
-    "@class" : "org.jasig.cas.services.ReturnAllAttributeReleasePolicy",
+    "@class" : "org.apereo.cas.services.ReturnAllAttributeReleasePolicy",
     "authorizedToReleaseCredentialPassword" : false,
     "authorizedToReleaseProxyGrantingTicket" : false
   },
   "accessStrategy" : {
-    "@class" : "org.jasig.cas.services.DefaultRegisteredServiceAccessStrategy",
+    "@class" : "org.apereo.cas.services.DefaultRegisteredServiceAccessStrategy",
     "enabled" : true,
     "ssoEnabled" : true
   }

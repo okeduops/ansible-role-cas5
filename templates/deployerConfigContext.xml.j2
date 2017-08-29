@@ -35,12 +35,12 @@
         <ref bean="rememberMeAuthenticationMetaDataPopulator" />
     </util:list>
 
-    <bean id="attributeRepository" class="org.jasig.services.persondir.support.NamedStubPersonAttributeDao" />
+    <bean id="attributeRepository" class="org.apereo.services.persondir.support.NamedStubPersonAttributeDao" />
 
 {% if ((cas_ldap is defined) and (cas_ldap is not none)) %}
 {% for ldap in cas_ldap %}
     <bean id="ldapAuthenticationHandler{{ loop.index }}"
-      class="org.jasig.cas.authentication.LdapAuthenticationHandler"
+      class="org.apereo.cas.authentication.LdapAuthenticationHandler"
       p:name="ldapAuthenticationHandler{{ loop.index }}"
       p:principalIdAttribute="sAMAccountName"
       c:authenticator-ref="ldap-ad-authenticator{{ loop.index }}">
@@ -75,7 +75,7 @@
     <alias name="acceptAnyAuthenticationPolicyFactory" alias="authenticationPolicyFactory" />
 
     <bean id="auditTrailManager"
-          class="org.jasig.inspektr.audit.support.Slf4jLoggingAuditTrailManager"
+          class="org.apereo.inspektr.audit.support.Slf4jLoggingAuditTrailManager"
           p:entrySeparator="${cas.audit.singleline.separator:|}"
           p:useSingleLine="${cas.audit.singleline:false}"/>
 
