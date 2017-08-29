@@ -11,7 +11,7 @@ cas_host_name: "cas01.example.org"
 
 # Specify a cas overlay
 cas_overlay_repo: "https://github.com/apereo/cas-overlay-template.git"
-cas_overlay_version: "4.1"
+cas_overlay_version: "5.2"
 
 # SSL paths
 ssl_cert_path: /etc/pki/tls/certs

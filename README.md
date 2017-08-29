@@ -36,31 +36,50 @@ You can optionally authenticate against multiple ldap systems.  This role curren
 
 ```
 cas_ldap:
-    # LDAP General
-  - url: ""
-    use_ssl: "false"
-    useStartTLS: "true"
-    rootDn: ""
-    baseDn: ""
-    managerDn: ""
-    managerPassword: ""
-    domain: ""
-    connectTimeout: 3000
-    # LDAP connection pool
-    pool_minSize: 1
-    pool_maxSize: 10
-    pool_validateOnCheckout: "false"
-    pool_validatePeriodically: "true"
-    pool_blockWaitTime: 3000
-    pool_validatePeriod: 300
-    pool_prunePeriod: 300
-    pool_idleTime: 600
-    # LDAP authentication
-    authn_searchFilter: "sAMAccountName={user}"
-    userFilter: ""
-    usePpolicy: "false"
-    allowMultipleDns: "true"
-    failFastInitialize: "true"
+    # URI for this LDAP endpoint
+  - url: 'ldap://ldap.example.com'
+    # Type of system:
+    # AD|AUTHENTICATED|DIRECT|ANONYMOUS|SASL
+    type: 'AD'
+    # Start TLS for SSL connections
+    useSsl: 'true'
+    useStartTLS: 'false'
+    # LDAP connection timeout in milliseconds
+    connectTimeout: '5000'
+    # Setting to true allows cas to start without this ldap provider
+    failFast: 'true'
+    # Base DN of users to be authenticated
+    baseDn: 'OU=Users,DC=domain,DC=example,DC=com'
+    # DN format for users to be authenticated
+    dnFormat: '%s@example.com'
+    # The filter is used to search for the user account
+    # https://access.redhat.com/documentation/en-US/Red_Hat_Directory_Server/8.2/html/Administration_Guide/Finding_Directory_Entries-LDAP_Search_Filters.html
+    userFilter: 'sAMAccountName={user}'
+    # Recursively search the Base DN?
+    subtreeSearch: 'true'
+    # The attribute that represents the username
+    principalAttributeId: 'sAMAccountName'
+    # The attribute that represents the password
+    principalAttributePassword: 'unicodePwd'
+    # A list of principal attributes
+    principalAttributeList: 'sn,cn,givenName,sAMAccountName'
+    # Modifies principal attributes returned by CAS
+    # NONE|UPPERCASE|LOWERCASE
+    principalTransformation_caseConversion: 'NONE'
+    # Allows multiple values per attribute
+    allowMultiplePrincipalAttributeValues: 'true'
+    # The junk drawer of user attributes
+    additionalAttributes: 'memberOf'
+    # Bind account DN
+    bindDn: 'CN=ServiceAccount,OU=SomeNonStandardOU,DC=domain,DC=example,DC=com'
+    # Bind account password
+    bindCredential: 'AStrongPassphraseofSomeSort'
+    # LDAP connection pool configuration
+    pool_minSize: '0'
+    pool_maxSize: '10'
+    pool_validateOnCheckout: 'true'
+    pool_validatePeriodically: 'true'
+    pool_validatePeriod: '600'
 ```
 
 You can optionally configure CAS to act as a client against a SAML ID provider. Learn about CAS and SAML to discover how to configure these values.
