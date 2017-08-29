@@ -6,12 +6,13 @@
     owner: root
     group: wheel
     mode: 0775
+    recurse: yes
   with_items:
-    - /etc/cas
+    - /etc/cas/config
 - name: Place CAS properties
   template:
     src: cas.properties.j2
-    dest: /etc/cas/cas.properties
+    dest: /etc/cas/config/cas.properties
 - name: Place fileauth password file
   template:
     src: people.txt.j2
