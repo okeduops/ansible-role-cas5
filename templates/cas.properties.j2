@@ -17,8 +17,8 @@
 # under the License.
 #
 
-server.name={{ cas_server_name }}
-server.prefix=${server.name}
+cas.server.name={{ cas_server_name }}
+cas.server.prefix=${server.name}
 
 {% if ((cas_saml2_idp is defined) and (cas_saml2_idp is not none)) %}
 # SAML2 IdP specific settings:
@@ -35,7 +35,7 @@ cas.samlSP.testShib.description=TestShib Integration
 cas.samlSP.testShib.attributes=eduPersonPrincipalName
 
 # Office 365 SP
-cas.samlSP.office365.metadata=/etc/cas/saml/azure.xml
+cas.samlSP.office365.metadata=https://nexus.microsoftonline-p.com/federationmetadata/saml20/federationmetadata.xml
 cas.samlSP.office365.name=O365
 cas.samlSP.office365.description=O365 Integration
 cas.samlSP.office365.nameIdAttribute=scopedImmutableID
@@ -46,7 +46,7 @@ cas.samlSP.office365.attributes=IDPEmail,ImmutableID
 # Unique CAS node name
 # host.name is used to generate unique Service Ticket IDs and SAMLArtifacts.  This is usually set to the specific
 # hostname of the machine running the CAS node, but it could be any label so long as it is unique in the cluster.
-host.name={{ cas_host_name }}
+cas.host.name={{ cas_host_name }}
 
 ##
 # CAS SSO Cookie Generation & Security
@@ -55,40 +55,37 @@ host.name={{ cas_host_name }}
 # Do note that the following settings MUST be generated per deployment.
 #
 # The encryption secret key. By default, must be a octet string of size 256.
-tgc.encryption.key={{ cas_tgc_encryption_key }}
+cas.tgc.encryption.key={{ cas_tgc_encryption_key }}
 
 # The signing secret key. By default, must be a octet string of size 512.
-tgc.signing.key={{ cas_tgc_signing_key }}
+cas.tgc.signing.key={{ cas_tgc_signing_key }}
 
 # Decides whether SSO cookie should be created only under secure connections.
-tgc.secure=true
+cas.tgc.secure=true
 
 # The expiration value of the SSO cookie
-tgc.maxAge=-1
+cas.tgc.maxAge=-1
 
 # The name of the SSO cookie
-tgc.name=TGC
+cas.tgc.name=TGC
 
 # The path to which the SSO cookie will be scoped
-tgc.path=/
+cas.tgc.path=/
 
 # The expiration value of the SSO cookie for long-term authentications
 # tgc.remember.me.maxAge=1209600
 
 # Decides whether SSO Warning cookie should be created only under secure connections.
-warn.cookie.secure=true
+cas.warningCookie.secure=true
 
 # The expiration value of the SSO Warning cookie
-warn.cookie.maxAge=-1
+cas.warningCookie.maxAge=-1
 
 # The name of the SSO Warning cookie
-warn.cookie.name=CASPRIVACY
+cas.warningCookie.name=CASPRIVACY
 
 # The path to which the SSO Warning cookie will be scoped
-warn.cookie.path=/
-
-# Whether we should track the most recent session by keeping the latest service ticket
-tgt.onlyTrackMostRecentSession = true
+cas.warningCookie.path=/
 
 ##
 # CAS UI Theme Resolution
@@ -110,8 +107,8 @@ cas.logout.followServiceRedirects={{ cas_logout_followServiceRedirects }}
 # File Authentication
 
 {% if ((cas_fileauth_users is defined) and (cas_fileauth_users is not none)) %}
-file.authn.filename=file:///etc/cas/people.txt
-file.authn.separator=::
+cas.authn.file.filename=file:///etc/cas/people.txt
+cas.authn.file.separator=::
 {% endif %}
 
 ##
@@ -132,53 +129,57 @@ cas.authn.accept.users=
 ##
 # Single Sign-On Session TGT Timeouts
 #
+
+# Whether we should track the most recent session by keeping the latest service ticket
+cas.ticket.tgt.onlyTrackMostRecentSession = true
+
 # Inactivity Timeout Policy
-tgt.timeout.maxTimeToLiveInSeconds={{ cas_tgt_ttl }}
+cas.ticket.tgt.timeout.maxTimeToLiveInSeconds={{ cas_tgt_ttl }}
 
 # Hard Timeout Policy
-tgt.timeout.hard.maxTimeToLiveInSeconds={{ cas_tgt_hard_max }}
+cas.ticket.tgt.hardTimeout.maxTimeToKillInSeconds={{ cas_tgt_hard_max }}
 #
 # Throttled Timeout Policy
-tgt.throttled.maxTimeToLiveInSeconds={{ cas_tgt_ttl }}
-tgt.throttled.timeInBetweenUsesInSeconds=5
+cas.ticket.tgt.throttledTimeout.timeToKillInSeconds={{ cas_tgt_ttl }}
+cas.ticket.tgt.throttledTimeout.timeInBetweenUsesInSeconds=5
 
 # Default Expiration Policy
-tgt.maxTimeToLiveInSeconds={{ cas_tgt_ttl }}
-tgt.timeToKillInSeconds={{ cas_tgt_ttk }}
+cas.ticket.tgt.maxTimeToLiveInSeconds={{ cas_tgt_ttl }}
+cas.ticket.tgt.timeToKillInSeconds={{ cas_tgt_ttk }}
 
 ##
 # Authentication delegation using pac4j
 #
 {% if ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none)) %}
-cas.pac4j.client.authn.typedidused={{ cas_pac4j_client_authn_typedidused }}
+cas.authn.pac4j.typedidused={{ cas_pac4j_client_authn_typedidused }}
 {% endif %}
-# cas.pac4j.facebook.id=
-# cas.pac4j.facebook.secret=
-# cas.pac4j.facebook.scope=
-# cas.pac4j.facebook.fields=
-# cas.pac4j.twitter.id=
-# cas.pac4j.twitter.secret=
+# cas.authn.pac4j.facebook.id=
+# cas.authn.pac4j.facebook.secret=
+# cas.authn.pac4j.facebook.scope=
+# cas.authn.pac4j.facebook.fields=
+# cas.authn.pac4j.twitter.id=
+# cas.authn.pac4j.twitter.secret=
 {% if ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none)) %}
-cas.pac4j.saml.keystorePassword={{ cas_pac4j_saml.storepass }}
-cas.pac4j.saml.privateKeyPassword={{ cas_pac4j_saml.keypass }}
-cas.pac4j.saml.keystorePath=/etc/cas/samlKeystore.jks
-cas.pac4j.saml.identityProviderMetadataPath=/etc/cas/samlIdP.xml
-# cas.pac4j.saml.maximumAuthenticationLifetime=
-cas.pac4j.saml.serviceProviderEntityId={{ cas_pac4j_saml.entityId }}
-cas.pac4j.saml.serviceProviderMetadataPath=/etc/cas/samlSP.xml
+cas.authn.pac4j.saml.keystorePassword={{ cas_pac4j_saml.storepass }}
+cas.authn.pac4j.saml.privateKeyPassword={{ cas_pac4j_saml.keypass }}
+cas.authn.pac4j.saml.keystorePath=/etc/cas/samlKeystore.jks
+cas.authn.pac4j.saml.identityProviderMetadataPath=/etc/cas/samlIdP.xml
+# cas.authn.pac4j.saml.maximumAuthenticationLifetime=
+cas.authn.pac4j.saml.serviceProviderEntityId={{ cas_pac4j_saml.entityId }}
+cas.authn.pac4j.saml.serviceProviderMetadataPath=/etc/cas/samlSP.xml
 {% endif %}
-# cas.pac4j.cas.loginUrl=
-# cas.pac4j.cas.protocol=
-# cas.pac4j.oidc.id=
-# cas.pac4j.oidc.secret=
-# cas.pac4j.oidc.discoveryUri=
-# cas.pac4j.oidc.useNonce=
-# cas.pac4j.oidc.preferredJwsAlgorithm=
-# cas.pac4j.oidc.maxClockSkew=
-# cas.pac4j.oidc.customParamKey1=
-# cas.pac4j.oidc.customParamValue1=
-# cas.pac4j.oidc.customParamKey2=
-# cas.pac4j.oidc.customParamValue2=
+# cas.authn.pac4j.cas.loginUrl=
+# cas.authn.pac4j.cas.protocol=
+# cas.authn.pac4j.oidc.id=
+# cas.authn.pac4j.oidc.secret=
+# cas.authn.pac4j.oidc.discoveryUri=
+# cas.authn.pac4j.oidc.useNonce=
+# cas.authn.pac4j.oidc.preferredJwsAlgorithm=
+# cas.authn.pac4j.oidc.maxClockSkew=
+# cas.authn.pac4j.oidc.customParamKey1=
+# cas.authn.pac4j.oidc.customParamValue1=
+# cas.authn.pac4j.oidc.customParamKey2=
+# cas.authn.pac4j.oidc.customParamValue2=
 {% if ((cas_ldap is defined) and (cas_ldap is not none)) %}
 {% for ldap in cas_ldap %}
 
