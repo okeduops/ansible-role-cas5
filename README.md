@@ -34,6 +34,8 @@ You can optionally enable a [SAML2 Identity Provider](https://apereo.github.io/c
 To do so, set:
 ```
 cas_saml2_idp: true
+cas_samlIdp_hostName: cas.example.com
+cas_samlIdp_scope: example.com
 ```
 
 

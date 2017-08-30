@@ -20,6 +20,13 @@
 server.name={{ cas_server_name }}
 server.prefix=${server.name}
 
+{% if ((cas_ldap is defined) and (cas_ldap is not none)) %}
+# SAML2 IdP specific settings:
+cas.authn.samlIdp.entityId=${server.name}/idp
+cas.authn.samlIdp.hostName={{ cas_samlIdp_hostName }}
+cas.authn.samlIdp.scope={{ cas_samlIdp_scope }}
+{% endif %}
+
 ##
 # Unique CAS node name
 # host.name is used to generate unique Service Ticket IDs and SAMLArtifacts.  This is usually set to the specific
