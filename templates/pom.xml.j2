@@ -45,6 +45,10 @@
                         <overlay>
                             <groupId>org.apereo.cas</groupId>
                             <artifactId>cas-server-webapp</artifactId>
+                            <excludes>
+                                <exclude>WEB-INF/classes/services/HTTPSandIMAPS-10000001.json</exclude>
+                                <exclude>WEB-INF/classes/services/Apereo-10000002.json</exclude>
+                            </excludes>
                         </overlay>
                     </overlays>
                 </configuration>
