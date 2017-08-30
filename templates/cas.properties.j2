@@ -18,11 +18,11 @@
 #
 
 cas.server.name={{ cas_server_name }}
-cas.server.prefix=${server.name}
+cas.server.prefix=${cas.server.name}
 
 {% if ((cas_saml2_idp is defined) and (cas_saml2_idp is not none)) %}
 # SAML2 IdP specific settings:
-cas.authn.samlIdp.entityId=${server.name}/idp
+cas.authn.samlIdp.entityId=${cas.server.name}/idp
 cas.authn.samlIdp.hostName={{ cas_samlIdp_hostName }}
 cas.authn.samlIdp.scope={{ cas_samlIdp_scope }}
 
