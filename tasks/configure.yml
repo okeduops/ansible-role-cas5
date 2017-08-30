@@ -45,11 +45,6 @@
     dest: /etc/cas/samlIdP.xml
   when: ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none))
 
-- name: Place CAS log config
-  template:
-    src: log4j2.xml.j2
-    dest: /etc/cas/log4j2.xml
-
 - name: Place server.xml for Tomcat
   template:
     src: server.xml.j2
