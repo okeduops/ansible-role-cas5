@@ -20,11 +20,26 @@
 server.name={{ cas_server_name }}
 server.prefix=${server.name}
 
-{% if ((cas_ldap is defined) and (cas_ldap is not none)) %}
+{% if ((cas_saml2_idp is defined) and (cas_saml2_idp is not none)) %}
 # SAML2 IdP specific settings:
 cas.authn.samlIdp.entityId=${server.name}/idp
 cas.authn.samlIdp.hostName={{ cas_samlIdp_hostName }}
 cas.authn.samlIdp.scope={{ cas_samlIdp_scope }}
+
+# SAML2 canned SP integrations.
+# https://apereo.github.io/cas/5.0.x/integration/Configuring-SAML-SP-Integrations.html
+# TestShib SP
+cas.samlSP.testShib.metadata=http://www.testshib.org/metadata/testshib-providers.xml
+cas.samlSP.testShib.name=TestShib
+cas.samlSP.testShib.description=TestShib Integration
+cas.samlSP.testShib.attributes=eduPersonPrincipalName
+
+# Office 365 SP
+cas.samlSP.office365.metadata=/etc/cas/saml/azure.xml
+cas.samlSP.office365.name=O365
+cas.samlSP.office365.description=O365 Integration
+cas.samlSP.office365.nameIdAttribute=scopedImmutableID
+cas.samlSP.office365.attributes=IDPEmail,ImmutableID
 {% endif %}
 
 ##
