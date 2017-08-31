@@ -64,14 +64,14 @@
     creates: /etc/cas/samlKeystore.jks
   when: ((cas_pac4j_saml is defined) and (cas_pac4j_saml is not none))
 
-- name: Delete Bad LDAP Certificate
+- name: Delete Imported TLS Certificates
   shell: >
     keytool -delete -alias "{{ item.hostname }}" -keystore "{{ cas_ca_keystore }}" -storepass "{{ cas_ca_storepass }}" -noprompt
   with_items: "{{ cas_import_tls_cert }}"
   when: ((cas_import_tls_cert is defined) and (cas_import_tls_cert is not none))
   ignore_errors: yes
 
-- name: Import Bad LDAP Certificate
+- name: Import TLS Certificates
   shell: >
     echo -n | openssl s_client -connect "{{ item.hostname }}":"{{ item.port }}"  | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | keytool -import -trustcacerts -alias "{{ item.hostname }}" -keystore "{{ cas_ca_keystore }}" -storepass "{{ cas_ca_storepass }}" -noprompt
   with_items: "{{ cas_import_tls_cert }}"
