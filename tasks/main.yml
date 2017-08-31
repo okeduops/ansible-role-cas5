@@ -2,15 +2,24 @@
 # tasks file for cas
 - include: yum.yml
   become: true
+
+- include: assets.yml
+  become: true
+
 - include: ssl-selfsign.yml
   become: true
+
 - include: source.yml
   become: true
+
 - include: build.yml
   become: true
+
 - include: configure.yml
   become: true
+
 - include: deploy.yml
   become: true
+
 - include: services.yml
   become: true

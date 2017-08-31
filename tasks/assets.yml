@@ -1,0 +1,22 @@
+---
+
+- name: Ensure /opt/oulib/cas/bin exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: tomcat
+    group: wheel
+    mode: 0775
+    recurse: yes
+  with_items:
+    - /opt/oulib/cas/bin
+
+- name: Place helper script
+  copy:
+    owner: root
+    group: root
+    mode: 0775
+    src: "{{ item }}"
+    dest: "/opt/oulib/cas/bin/{{item}}"
+  with_items:
+    - cas_idp_metadata_cleanup.sh
