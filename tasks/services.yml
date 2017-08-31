@@ -6,11 +6,13 @@
     enabled: yes
   with_items:
   - tomcat
+
 - name: Wait for war deployment to finish
   wait_for:
     timeout: 600
     path: "/var/log/tomcat/catalina.{{ ansible_date_time.date }}.log"
     search_regex: 'INFO: Deployment of web application archive /var/lib/tomcat/webapps/ROOT\.war has finished'
+
 - name: Verify that cas is up
   uri:
     url: https://localhost:8443/login

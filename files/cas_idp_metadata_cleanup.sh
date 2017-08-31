@@ -23,4 +23,4 @@ $ {g
    s/.//p
    }'| grep -Ev 'bindings:HTTP-POST-SimpleSign|bindings:SOAP|SingleLogoutService Binding="ur
 n:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect|urn:mace:shibboleth:1.0:profiles:AuthnReque
-st|^$|^\s*$'
+st|^$|^\s*$' > $2

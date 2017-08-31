@@ -1,0 +1,13 @@
+---
+
+- name: copy idp-metadata.xml to idp-metadata.xml.orig
+  copy:
+    remote_src: True
+    src: /etc/cas/saml/idp-metadata.xml
+    dest: /etc/cas/saml/idp-metadata.xml.orig
+
+- name: Perform IdP metadata cleanup
+  command: >
+    /opt/oulib/cas/bin/cas_idp_metadata_cleanup.sh
+    /etc/cas/saml/idp-metadata.xml.orig
+    /etc/cas/saml/idp-metadata.xml

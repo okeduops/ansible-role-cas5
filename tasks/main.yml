@@ -23,3 +23,6 @@
 
 - include: services.yml
   become: true
+
+- include: metadata.yml
+  become: true
