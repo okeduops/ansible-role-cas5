@@ -73,7 +73,7 @@ cas_ldap: !!null
 # - hostname: badldaps.localdomain
 #   port: 636
 # Not suitable for production.
-cas_bad_ldaps: !!null
+cas_import_tls_cert: !!null
 
 # Keystore for CA certificates
 cas_ca_keystore: /lib/jvm/jre/lib/security/cacerts
