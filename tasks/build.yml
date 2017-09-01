@@ -52,28 +52,23 @@
   set_fact:
     cas_tgc_signing_key: "{{ cas_tgc_signing_key.stdout }}"
 
-- name: Remove service declaration overlay directory
+- name: Overlay src and target directories are absent
   file:
-    path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
+    path: "{{ item }}"
     state: absent
+  with_items:
+    - /usr/src/cas-overlay/src
+    - /usr/src/cas-overlay/target
 
-- name: Ensure empty service declaration overlay directory exists
+- name: Overlay src and target directories exist
   file:
-    path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
+    path: "{{ item }}"
     state: directory
     recurse: yes
-
-- name: Ensure spring configuration overlay directory exists
-  file:
-    path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/spring-configuration
-    state: directory
-    recurse: yes
-
-- name: Ensure jsp ui overlay directory exists
-  file:
-    path: /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui
-    state: directory
-    recurse: yes
+  with_items:
+    - /usr/src/cas-overlay/target
+    - /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/services
+    - /usr/src/cas-overlay/src/main/webapp/WEB-INF/spring-configuration
 
 - name: Configure overlay using role templates
   template:
@@ -84,8 +79,6 @@
       dest: /usr/src/cas-overlay/pom.xml
     - src: messages.properties.j2
       dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/classes/messages.properties
-    - src: casLoginView.jsp.j2
-      dest: /usr/src/cas-overlay/src/main/webapp/WEB-INF/view/jsp/default/ui/casLoginView.jsp
 
 - name: Create Service Declarations
   template:
