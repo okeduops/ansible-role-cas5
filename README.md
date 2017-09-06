@@ -1,4 +1,4 @@
-OKEduOps.CAS5
+OKEduOps.cas5
 =========
 
 [CAS 5](https://apereo.github.io/cas/5.0.x/index.html) for OKEduOps.
@@ -125,7 +125,7 @@ Example Playbook
     - my-vars.yml
   roles:
     - OULibraries.centos7
-    - OULibraries.cas
+    - OKEduOps.cas5
     - OULibraries.users
 ```
 
