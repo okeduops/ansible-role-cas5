@@ -1,7 +1,7 @@
-OKEduOps.CAS
+OKEduOps.CAS5
 =========
 
-[CAS](https://apereo.github.io/cas/5.0.x/index.html) for OKEduOps.
+[CAS 5](https://apereo.github.io/cas/5.0.x/index.html) for OKEduOps.
 Forked from [OULibraries CAS 4.x ansible role](https://github.com/OULibraries/ansible-role-cas)
 
 Currently focused on [LDAP integration](https://apereo.github.io/cas/5.0.x/installation/LDAP-Authentication.html), and [SAML2 integration](https://apereo.github.io/cas/5.0.x/installation/Configuring-SAML2-Authentication.html).
